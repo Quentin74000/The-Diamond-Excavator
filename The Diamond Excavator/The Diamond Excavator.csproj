@@ -9,4 +9,46 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="img\COEUR.png" />
+    <None Remove="img\Couers.png" />
+    <None Remove="img\Creuser.gif" />
+    <None Remove="img\Mines.png" />
+    <None Remove="img\NIV DIFFICILE BOMBE.png" />
+    <None Remove="img\NIV MOYEN BOMBE.png" />
+    <None Remove="img\PelleteuseDroite.png" />
+    <None Remove="img\PelleteuseGauche.png" />
+    <None Remove="img\Terre.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\COEUR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Couers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Creuser.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Mines.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\NIV DIFFICILE BOMBE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\NIV MOYEN BOMBE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\PelleteuseDroite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\PelleteuseGauche.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Terre.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>
