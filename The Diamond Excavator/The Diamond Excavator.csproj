@@ -9,4 +9,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Image de fond Menu.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image de fond Menu.jpg" />
+  </ItemGroup>
+
 </Project>
