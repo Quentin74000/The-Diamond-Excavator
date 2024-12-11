@@ -5,14 +5,45 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:The_Diamond_Excavator"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    x:Name="fenetreJeu"
+    Title="FenetreJeu"
     Width="800"
     Height="450"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
     mc:Ignorable="d">
     <Grid>
-        <Image
-            Margin="366,20,366,353"
-            Source="/img/Pelleteuse.png"
-            Stretch="Fill" />
+        <Canvas x:Name="zoneJeu">
+            <Rectangle
+                x:Name="collisionJoueur"
+                Canvas.Left="370"
+                Canvas.Top="47"
+                Width="60"
+                Height="60" />
+            <Rectangle
+                x:Name="bloc"
+                Canvas.Left="368"
+                Canvas.Top="107"
+                Width="65"
+                Height="65"
+                Stroke="Black">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/img/Terre.png" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Image
+                x:Name="joueur"
+                Canvas.Left="370"
+                Canvas.Top="47"
+                Width="60"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                KeyDown="joueur_ToucheEnfoncee"
+                KeyUp="joueur_ToucheRelachee"
+                Source="/img/PelleteuseDroite.png"
+                Stretch="Fill" />
+            <Label x:Name="TEST" Content="Label" Canvas.Left="181" Canvas.Top="62"/>
+        </Canvas>
     </Grid>
 </Window>
