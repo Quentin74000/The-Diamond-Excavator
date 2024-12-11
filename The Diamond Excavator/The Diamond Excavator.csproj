@@ -10,8 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="img\COEUR.png" />
-    <None Remove="img\Couers.png" />
+    <None Remove="img\Coeur.png" />
     <None Remove="img\Creuser.gif" />
     <None Remove="img\Mines.png" />
     <None Remove="img\NIV DIFFICILE BOMBE.png" />
@@ -22,10 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="img\COEUR.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="img\Couers.png">
+    <Resource Include="img\Coeur.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Creuser.gif">
