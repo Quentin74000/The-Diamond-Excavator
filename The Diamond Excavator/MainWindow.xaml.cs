@@ -17,10 +17,9 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static bool gauche, droite;
-        public static readonly int vitesseJoueur = 5;
-        private static BitmapImage pelleteuseGauche;
-        private static BitmapImage pelleteuseDroite;
+        private static bool gauche, droite, creuse;
+        private static int vitesseJoueur = 5;
+        private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
         private static DispatcherTimer timer;
         private static int test=0;
         public MainWindow()
@@ -39,6 +38,10 @@ namespace The_Diamond_Excavator
             {
                 droite = true;
             }
+            if (Key.Down == e.Key)
+            {
+                creuse = true;
+            }
         }
         private void joueur_ToucheRelachee(object sender, KeyEventArgs e)
         {
@@ -50,12 +53,19 @@ namespace The_Diamond_Excavator
             {
                 droite = false;
             }
+            if (Key.Down == e.Key)
+            {
+                creuse = false;
+            }
         }
         private void InitialisationImages()
         {
             {
                 pelleteuseGauche = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseGauche.png"));
                 pelleteuseDroite = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseDroite.png"));
+                pelleteuseCreuse1 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse1.png"));
+                pelleteuseCreuse2 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse2.png"));
+                pelleteuseCreuse3 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse3.png"));
             }
         }
         private void InitialisationTimer()
@@ -65,6 +75,7 @@ namespace The_Diamond_Excavator
             timer.Tick += Jeu;
             timer.Start();
         }
+
         private void Jeu(object? sender, EventArgs e)
         {
             test++;
@@ -78,6 +89,16 @@ namespace The_Diamond_Excavator
             if (droite == true && gauche == false)
             {
                 Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
+                joueur.Source = pelleteuseDroite;
+            }
+            if (creuse == true && droite == false && gauche == false)
+            {
+                joueur.Source = pelleteuseCreuse1;
+                TimeSpan.FromSeconds(1);
+                joueur.Source = pelleteuseCreuse2;
+                TimeSpan.FromSeconds(1);
+                joueur.Source = pelleteuseCreuse3;
+                TimeSpan.FromSeconds(1);
                 joueur.Source = pelleteuseDroite;
             }
         }    

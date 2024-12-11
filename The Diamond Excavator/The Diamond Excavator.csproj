@@ -12,9 +12,13 @@
   <ItemGroup>
     <None Remove="img\Coeur.png" />
     <None Remove="img\Creuser.gif" />
+    <None Remove="img\Image de fond Menu.jpg" />
     <None Remove="img\Mines.png" />
     <None Remove="img\NIV DIFFICILE BOMBE.png" />
     <None Remove="img\NIV MOYEN BOMBE.png" />
+    <None Remove="img\PelleteuseCreuse1.png" />
+    <None Remove="img\PelleteuseCreuse2.png" />
+    <None Remove="img\PelleteuseCreuse3.png" />
     <None Remove="img\PelleteuseDroite.png" />
     <None Remove="img\PelleteuseGauche.png" />
     <None Remove="img\Terre.png" />
@@ -27,6 +31,9 @@
     <Resource Include="img\Creuser.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="img\Image de fond Menu.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\Mines.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -34,6 +41,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\NIV MOYEN BOMBE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\PelleteuseCreuse1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\PelleteuseCreuse2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\PelleteuseCreuse3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\PelleteuseDroite.png">

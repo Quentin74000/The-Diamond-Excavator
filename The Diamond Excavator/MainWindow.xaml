@@ -9,6 +9,8 @@
     Title="FenetreJeu"
     Width="800"
     Height="450"
+    KeyDown="joueur_ToucheEnfoncee"
+    KeyUp="joueur_ToucheRelachee"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     mc:Ignorable="d">
@@ -39,11 +41,13 @@
                 Height="60"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                KeyDown="joueur_ToucheEnfoncee"
-                KeyUp="joueur_ToucheRelachee"
                 Source="/img/PelleteuseDroite.png"
                 Stretch="Fill" />
-            <Label x:Name="TEST" Content="Label" Canvas.Left="181" Canvas.Top="62"/>
+            <Label
+                x:Name="TEST"
+                Canvas.Left="181"
+                Canvas.Top="62"
+                Content="Label" />
         </Canvas>
     </Grid>
 </Window>
