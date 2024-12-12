@@ -18,9 +18,10 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static bool gauche, droite, creuse;
+        private static bool gauche, droite, creuse, saute;
         private static int vitesseJoueur = 5;
         private static int gravite = 10;
+        private static int saut = 70;
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
         private static DispatcherTimer minuterie;
         private static DispatcherTimer collision;
@@ -47,6 +48,10 @@ namespace The_Diamond_Excavator
             {
                 creuse = true;
             }
+            if (Key.Up == e.Key)
+            {
+                saute = true;
+            }
         }
         private void joueur_ToucheRelachee(object sender, KeyEventArgs e)
         {
@@ -61,6 +66,10 @@ namespace The_Diamond_Excavator
             if (Key.Down == e.Key)
             {
                 creuse = false;
+            }
+            if (Key.Up == e.Key)
+            {
+                saute = false;
             }
         }
         private void InitialisationImages()
@@ -89,7 +98,7 @@ namespace The_Diamond_Excavator
         {
             Rectangle nouveauBloc = new Rectangle
             {
-                Tag = "Bloc",
+                Tag = "nouveauBloc",
                 Height = bloc.Height,
                 Width = bloc.Width,
                 Stroke = bloc.Stroke,
@@ -97,7 +106,7 @@ namespace The_Diamond_Excavator
             };
 
             int totalDecalageVertical = 0;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int totalDecalage = 0;
                 Canvas.SetTop(nouveauBloc, Canvas.GetTop(bloc));
@@ -105,25 +114,32 @@ namespace The_Diamond_Excavator
                 {
                     totalDecalage += decalageBloc;
                     Canvas.SetLeft(nouveauBloc, Canvas.GetLeft(bloc) + totalDecalage);
-                    zoneJeu.Children.Add(nouveauBloc);
+                    Canvas.SetTop(nouveauBloc, Canvas.GetTop(bloc) + totalDecalageVertical);
+                    //zoneJeu.Children.Add(nouveauBloc);
                     blocs.Add(nouveauBloc);
+                    Rect nouveauBlocCollision = new Rect(Canvas.GetLeft(nouveauBloc), Canvas.GetTop(nouveauBloc), nouveauBloc.Width, nouveauBloc.Height);
                 }
                 totalDecalageVertical += decalageBloc;
             }
         }
         private void Collision(object sender, EventArgs e)
         {
-            Rect blocCollision = new Rect(Canvas.GetLeft(bloc), Canvas.GetTop(bloc), bloc.Width, bloc.Height);
+            Rect bloccCollision = new Rect(Canvas.GetLeft(bloc), Canvas.GetTop(bloc), bloc.Width, bloc.Height);
             Rect JoueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
-            if (JoueurCollision.IntersectsWith(blocCollision))
+            foreach (Rectangle nouveauBloc in blocs)
             {
-                gravite = 0;
+                Rect blocCollision = new Rect(Canvas.GetLeft(nouveauBloc), Canvas.GetTop(nouveauBloc), nouveauBloc.Width, nouveauBloc.Height);
+                if (JoueurCollision.IntersectsWith(bloccCollision))
+                {
+                    gravite = 0;
+                }
+                else
+                {
+                    gravite = 10;
+                }
             }
-            else
-            {
-                gravite = 10;
-                Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
-            }
+            Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
+
         }
         private void Jeu(object? sender, EventArgs e)
         {
@@ -136,6 +152,10 @@ namespace The_Diamond_Excavator
             {
                 Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
                 joueur.Source = pelleteuseDroite;
+            }
+            if (saute == true && gravite == 0)
+            {
+                Canvas.SetTop(joueur, Canvas.GetTop(joueur) - saut);
             }
             //if (creuse == true && droite == false && gauche == false)
             //{
