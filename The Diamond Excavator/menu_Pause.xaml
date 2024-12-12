@@ -28,6 +28,7 @@
             Margin="0,278,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Click="butReprendrePause_Click"
             Content="REPRENDRE"
             FontFamily="Britannic Bold"
             FontSize="18" />
@@ -38,6 +39,7 @@
             Margin="0,348,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Click="butQuitterPause_Click"
             Content="QUITTER"
             FontFamily="Britannic Bold"
             FontSize="18" />
@@ -51,17 +53,29 @@
             FontSize="16" />
         <Slider
             x:Name="sliderVolumeMusique"
-            Width="196"
+            Width="200"
             Height="31"
             Margin="60,186,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top"
+            IsSnapToTickEnabled="true"
+            Maximum="100"
+            Minimum="0"
+            TickFrequency="10"
+            TickPlacement="TopLeft"
+            ValueChanged="sliderVolumeMusique_ValueChanged" />
         <Slider
             x:Name="sliderVolumeSon"
-            Width="190"
+            Width="200"
             Height="31"
             Margin="60,91,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top"
+            IsSnapToTickEnabled="true"
+            Maximum="100"
+            Minimum="0"
+            TickFrequency="10"
+            TickPlacement="TopLeft"
+            ValueChanged="sliderVolumeSon_ValueChanged" />
     </Grid>
 </Window>

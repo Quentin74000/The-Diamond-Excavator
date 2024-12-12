@@ -23,5 +23,30 @@ namespace The_Diamond_Excavator
         {
             InitializeComponent();
         }
+
+        private void butReprendrePause_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+
+        }
+
+        private void butQuitterPause_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void sliderVolumeMusique_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            string valeurSliderMusique = "";
+            valeurSliderMusique = sliderVolumeMusique.Value.ToString();
+            labVolumeMusique.Content = ("Volume Musique: " + valeurSliderMusique +"%");
+        }
+
+        private void sliderVolumeSon_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            string valeurSliderSon = "";
+            valeurSliderSon = sliderVolumeSon.Value.ToString();
+            labVolumeSon.Content = ("Volume Musique: " + valeurSliderSon + "%");
+        }
     }
 }
