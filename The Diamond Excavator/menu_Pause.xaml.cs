@@ -15,23 +15,13 @@ using System.Windows.Shapes;
 namespace The_Diamond_Excavator
 {
     /// <summary>
-    /// Logique d'interaction pour Menu_Jeux.xaml
+    /// Logique d'interaction pour menu_Pause.xaml
     /// </summary>
-    public partial class Menu_Jeux : Window
+    public partial class menu_Pause : Window
     {
-        public Menu_Jeux()
+        public menu_Pause()
         {
             InitializeComponent();
-        }
-
-        private void butJouer_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        private void butQuit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 }
