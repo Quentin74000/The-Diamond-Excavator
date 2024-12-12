@@ -17,9 +17,9 @@ namespace The_Diamond_Excavator
     /// <summary>
     /// Logique d'interaction pour menu_Pause.xaml
     /// </summary>
-    public partial class menu_Pause : Window
+    public partial class MenuPause : Window
     {
-        public menu_Pause()
+        public MenuPause()
         {
             InitializeComponent();
         }

@@ -33,5 +33,19 @@ namespace The_Diamond_Excavator
         {
             Application.Current.Shutdown();
         }
+
+        private void sliderVolumeSonMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            string valeurSliderMusique = "";
+            valeurSliderMusique = sliderVolumeSonMenuJeu.Value.ToString();
+            labVolumeSonMenuJeu.Content = ("Volume Son: " + valeurSliderMusique + "%");
+        }
+
+        private void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            string valeurSliderMusique = "";
+            valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value.ToString();
+            labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
+        }
     }
 }
