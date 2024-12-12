@@ -26,9 +26,9 @@
                 x:Name="bloc"
                 Canvas.Left="368"
                 Canvas.Top="107"
-                Width="65"
-                Height="65"
-                Stroke="Black">
+                Width="64"
+                Height="64"
+                Stroke="Black" Visibility="Hidden">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/img/Terre.png" />
                 </Rectangle.Fill>

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,12 +24,14 @@ namespace The_Diamond_Excavator
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
         private static DispatcherTimer minuterie;
         private static DispatcherTimer collision;
-        private static int test=0;
+        private static int decalageBloc = 64;
+        private List<Rectangle> blocs = new List<Rectangle>();
         public MainWindow()
         {
             InitializeComponent();
             InitialisationImages();
             InitialisationMinuterie();
+            CreationBlocs();
         }
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
         {
@@ -82,9 +85,31 @@ namespace The_Diamond_Excavator
             collision.Tick += Collision;
             collision.Start();
         }
-        private void CreationBlocs(object sender, KeyEventArgs e)
+        private void CreationBlocs()
         {
-            
+            Rectangle nouveauBloc = new Rectangle
+            {
+                Tag = "Bloc",
+                Height = bloc.Height,
+                Width = bloc.Width,
+                Stroke = bloc.Stroke,
+                Fill = bloc.Fill,
+            };
+
+            int totalDecalageVertical = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                int totalDecalage = 0;
+                Canvas.SetTop(nouveauBloc, Canvas.GetTop(bloc));
+                for (int j = 0; j < 10; j++)
+                {
+                    totalDecalage += decalageBloc;
+                    Canvas.SetLeft(nouveauBloc, Canvas.GetLeft(bloc) + totalDecalage);
+                    zoneJeu.Children.Add(nouveauBloc);
+                    blocs.Add(nouveauBloc);
+                }
+                totalDecalageVertical += decalageBloc;
+            }
         }
         private void Collision(object sender, EventArgs e)
         {
