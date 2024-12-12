@@ -29,6 +29,9 @@ namespace The_Diamond_Excavator
         private List<Rectangle> blocs = new List<Rectangle>();
         public MainWindow()
         {
+            MenuJeu fenetreMenu = new MenuJeu();
+            fenetreMenu.ShowDialog();
+
             InitializeComponent();
             InitialisationImages();
             InitialisationMinuterie();

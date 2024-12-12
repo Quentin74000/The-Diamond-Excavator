@@ -17,9 +17,9 @@ namespace The_Diamond_Excavator
     /// <summary>
     /// Logique d'interaction pour Menu_Jeux.xaml
     /// </summary>
-    public partial class Menu_Jeux : Window
+    public partial class MenuJeu : Window
     {
-        public Menu_Jeux()
+        public MenuJeu()
         {
             InitializeComponent();
         }
