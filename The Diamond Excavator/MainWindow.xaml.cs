@@ -97,52 +97,51 @@ namespace The_Diamond_Excavator
             collision.Tick += Collision;
             collision.Start();
         }
-        private void CreationBlocs()
+        public void CreationBlocs()
         {
-            Rectangle nouveauBloc = new Rectangle
-            {
-                Tag = "nouveauBloc",
-                Height = bloc.Height,
-                Width = bloc.Width,
-                Stroke = bloc.Stroke,
-                Fill = bloc.Fill,
-            };
-
             int totalDecalageVertical = 0;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 11; i++)
             {
                 int totalDecalage = 0;
-                Canvas.SetTop(nouveauBloc, Canvas.GetTop(bloc));
                 for (int j = 0; j < 10; j++)
                 {
+                    Rectangle nouveauBloc = new Rectangle
+                    {
+                        Tag = "nouveauBloc",
+                        Height = bloc.Height,
+                        Width = bloc.Width,
+                        Stroke = bloc.Stroke,
+                        Fill = bloc.Fill,
+                    };
                     totalDecalage += decalageBloc;
                     Canvas.SetLeft(nouveauBloc, Canvas.GetLeft(bloc) + totalDecalage);
                     Canvas.SetTop(nouveauBloc, Canvas.GetTop(bloc) + totalDecalageVertical);
-                    //zoneJeu.Children.Add(nouveauBloc);
+                    zoneJeu.Children.Add(nouveauBloc);
                     blocs.Add(nouveauBloc);
-                    Rect nouveauBlocCollision = new Rect(Canvas.GetLeft(nouveauBloc), Canvas.GetTop(nouveauBloc), nouveauBloc.Width, nouveauBloc.Height);
                 }
                 totalDecalageVertical += decalageBloc;
             }
         }
         private void Collision(object sender, EventArgs e)
         {
-            Rect bloccCollision = new Rect(Canvas.GetLeft(bloc), Canvas.GetTop(bloc), bloc.Width, bloc.Height);
-            Rect JoueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
+            Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
+            bool collisionDetectee = false;
+
             foreach (Rectangle nouveauBloc in blocs)
             {
                 Rect blocCollision = new Rect(Canvas.GetLeft(nouveauBloc), Canvas.GetTop(nouveauBloc), nouveauBloc.Width, nouveauBloc.Height);
-                if (JoueurCollision.IntersectsWith(bloccCollision))
+                if (joueurCollision.IntersectsWith(blocCollision))
                 {
                     gravite = 0;
-                }
-                else
-                {
-                    gravite = 10;
+                    collisionDetectee = true;
+                    break;
                 }
             }
+            if (!collisionDetectee)
+            {
+                gravite = 10;
+            }
             Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
-
         }
         private void Jeu(object? sender, EventArgs e)
         {
@@ -156,7 +155,7 @@ namespace The_Diamond_Excavator
                 Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
                 joueur.Source = pelleteuseDroite;
             }
-            if (saute == true && gravite == 0)
+            if (saute == true /*&& gravite == 0*/)
             {
                 Canvas.SetTop(joueur, Canvas.GetTop(joueur) - saut);
             }
@@ -170,6 +169,6 @@ namespace The_Diamond_Excavator
             //    TimeSpan.FromSeconds(1);
             //    joueur.Source = pelleteuseDroite;
             //}
-        }    
+        }
     }
 }
