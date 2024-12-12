@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:The_Diamond_Excavator"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Menu_Jeux"
+    x:Name="MenuJeux"
+    Title="MenuJeux"
     Width="500"
     Height="450"
     Background="White"
@@ -20,7 +21,9 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="butJouer_Click"
-            Content="JOUER" />
+            Content="JOUER"
+            FontFamily="Britannic Bold"
+            FontSize="16" />
         <Label
             x:Name="labNbVie"
             Margin="13,124,0,0"
@@ -83,14 +86,16 @@
             Text=""
             TextWrapping="Wrap" />
         <Button
-            x:Name="butQuit"
+            x:Name="butQuitter"
             Width="252"
             Height="56"
             Margin="0,347,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Click="butQuit_Click"
-            Content="QUITTEZ" />
+            Click="butQuitter_Click"
+            Content="QUITTER"
+            FontFamily="Britannic Bold"
+            FontSize="16" />
 
     </Grid>
 </Window>

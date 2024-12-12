@@ -29,7 +29,7 @@ namespace The_Diamond_Excavator
             DialogResult = true;
         }
 
-        private void butQuit_Click(object sender, RoutedEventArgs e)
+        private void butQuitter_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
