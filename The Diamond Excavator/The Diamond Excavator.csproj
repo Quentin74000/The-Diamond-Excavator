@@ -21,6 +21,7 @@
     <None Remove="img\PelleteuseCreuse3.png" />
     <None Remove="img\PelleteuseDroite.png" />
     <None Remove="img\PelleteuseGauche.png" />
+    <None Remove="img\sol.png" />
     <None Remove="img\Terre.png" />
   </ItemGroup>
 
@@ -56,6 +57,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\PelleteuseGauche.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\sol.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Terre.png">

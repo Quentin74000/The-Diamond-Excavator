@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="fenetreJeu"
     Title="FenetreJeu"
-    Width="800"
-    Height="450"
+    Width="1920"
+    Height="1080"
     KeyDown="joueur_ToucheEnfoncee"
     KeyUp="joueur_ToucheRelachee"
     WindowStartupLocation="CenterScreen"
@@ -16,24 +16,6 @@
     mc:Ignorable="d">
     <Grid>
         <Canvas x:Name="zoneJeu">
-            <Rectangle
-                x:Name="collisionJoueur"
-                Canvas.Left="370"
-                Canvas.Top="47"
-                Width="60"
-                Height="60" />
-            <Rectangle
-                x:Name="bloc"
-                Canvas.Left="368"
-                Canvas.Top="107"
-                Width="64"
-                Height="64"
-                Stroke="Black"
-                Visibility="Hidden">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/img/Terre.png" />
-                </Rectangle.Fill>
-            </Rectangle>
             <Image
                 x:Name="joueur"
                 Canvas.Left="370"
@@ -44,11 +26,70 @@
                 VerticalAlignment="Center"
                 Source="/img/PelleteuseDroite.png"
                 Stretch="Fill" />
-            <Label
-                x:Name="TEST"
-                Canvas.Left="181"
-                Canvas.Top="62"
-                Content="Label" />
+            <Rectangle
+                x:Name="collisionJoueur"
+                Canvas.Left="370"
+                Canvas.Top="47"
+                Width="60"
+                Height="60" />
+            <Rectangle
+                x:Name="bloc"
+                Canvas.Left="513"
+                Canvas.Top="107"
+                Width="64"
+                Height="64"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Stroke="Black">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/img/Terre.png" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Image
+                x:Name="imgSolGauche"
+                Canvas.Top="107"
+                Width="1920"
+                Height="957"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/img/sol.png"
+                Stretch="Fill" />
+            <Rectangle
+                x:Name="solGauche"
+                Canvas.Top="107"
+                Width="577"
+                Height="957"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Stroke="Black" />
+            <Rectangle
+                x:Name="solDroit"
+                Canvas.Left="1343"
+                Canvas.Top="107"
+                Width="577"
+                Height="957"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Stroke="Black" />
+            <Rectangle
+                x:Name="solBas"
+                Canvas.Left="577"
+                Canvas.Top="812"
+                Width="766"
+                Height="252"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderTransformOrigin="0.5,0.5"
+                Stroke="Black">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </Canvas>
     </Grid>
 </Window>
