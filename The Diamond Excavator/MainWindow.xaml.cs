@@ -136,6 +136,7 @@ namespace The_Diamond_Excavator
                     {
                         zoneJeu.Children.Remove(nouveauBloc);
                     }
+                    testCollision.Content = "Collision";
                     gravite = 0;
                     collisionDetectee = true;
                     break;
@@ -143,10 +144,12 @@ namespace The_Diamond_Excavator
             }
             if (!collisionDetectee)
             {
+                testCollision.Content = "Pas de collision";
                 gravite = 10;
             }
             if (joueurCollision.IntersectsWith(solGaucheCollision) || joueurCollision.IntersectsWith(solDroitCollision) || joueurCollision.IntersectsWith(solBasCollision))
             {
+                testCollision.Content = "Collision";
                 collisionDetectee = true;
                 gravite = 0;
             }

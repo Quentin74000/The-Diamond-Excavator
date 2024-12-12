@@ -90,6 +90,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+            <Label x:Name="testCollision" Content="Label" Canvas.Left="90" Canvas.Top="47"/>
         </Canvas>
     </Grid>
 </Window>
