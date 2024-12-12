@@ -24,6 +24,7 @@ namespace The_Diamond_Excavator
         private static DispatcherTimer collision;
         private static int decalageBloc = 64;
         private List<Rectangle> blocs = new List<Rectangle>();
+
         public MainWindow()
         {
             MenuJeu fenetreMenu = new MenuJeu();
@@ -34,6 +35,7 @@ namespace The_Diamond_Excavator
             InitialisationMinuterie();
             CreationBlocs();
         }
+
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
         {
             if (Key.Left == e.Key)
@@ -53,6 +55,7 @@ namespace The_Diamond_Excavator
                 saute = true;
             }
         }
+
         private void joueur_ToucheRelachee(object sender, KeyEventArgs e)
         {
             if (Key.Left == e.Key)
@@ -72,6 +75,7 @@ namespace The_Diamond_Excavator
                 saute = false;
             }
         }
+
         private void InitialisationImages()
         {
             {
@@ -82,6 +86,7 @@ namespace The_Diamond_Excavator
                 pelleteuseCreuse3 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse3.png"));
             }
         }
+
         private void InitialisationMinuterie()
         {
             minuterie = new DispatcherTimer();
@@ -94,10 +99,11 @@ namespace The_Diamond_Excavator
             collision.Tick += Collision;
             collision.Start();
         }
+
         public void CreationBlocs()
         {
             int totalDecalageVertical = 0;
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 13; i++)
             {
                 int totalDecalage = 0;
                 for (int j = 0; j < 12; j++)
@@ -119,6 +125,7 @@ namespace The_Diamond_Excavator
                 totalDecalageVertical += decalageBloc;
             }
         }
+
         private void Collision(object sender, EventArgs e)
         {
             Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
@@ -132,10 +139,11 @@ namespace The_Diamond_Excavator
                 Rect blocCollision = new Rect(Canvas.GetLeft(nouveauBloc), Canvas.GetTop(nouveauBloc), nouveauBloc.Width, nouveauBloc.Height);
                 if (joueurCollision.IntersectsWith(blocCollision))
                 {
-                    if (creuse == true)
-                    {
-                        zoneJeu.Children.Remove(nouveauBloc);
-                    }
+                        if (creuse == true)
+                        {
+                            zoneJeu.Children.Remove(nouveauBloc);
+                            blocs.Remove(nouveauBloc);
+                        }
                     testCollision.Content = "Collision";
                     gravite = 0;
                     collisionDetectee = true;
@@ -155,32 +163,29 @@ namespace The_Diamond_Excavator
             }
             Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
         }
+
         private void Jeu(object? sender, EventArgs e)
         {
             if (gauche == true && droite == false)
             {
-                Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) - vitesseJoueur);
+                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solGauche) || Canvas.GetLeft(joueur) >= solGauche.ActualWidth)
+                {
+                    Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) - vitesseJoueur);
+                }
                 joueur.Source = pelleteuseGauche;
             }
             if (droite == true && gauche == false)
             {
-                Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
+                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || Canvas.GetLeft(joueur) <= this.ActualWidth - solGauche.ActualWidth)
+                {
+                    Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
+                }
                 joueur.Source = pelleteuseDroite;
             }
             if (saute == true && gravite == 0)
             {
                 Canvas.SetTop(joueur, Canvas.GetTop(joueur) - saut);
             }
-            //if (creuse == true && droite == false && gauche == false)
-            //{
-            //    joueur.Source = pelleteuseCreuse1;
-            //    TimeSpan.FromSeconds(1);
-            //    joueur.Source = pelleteuseCreuse2;
-            //    TimeSpan.FromSeconds(1);
-            //    joueur.Source = pelleteuseCreuse3;
-            //    TimeSpan.FromSeconds(1);
-            //    joueur.Source = pelleteuseDroite;
-            //}
         }
     }
 }

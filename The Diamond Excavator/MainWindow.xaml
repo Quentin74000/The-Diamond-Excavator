@@ -17,21 +17,14 @@
     <Grid>
         <Canvas x:Name="zoneJeu">
             <Image
-                x:Name="joueur"
-                Canvas.Left="370"
-                Canvas.Top="47"
-                Width="60"
-                Height="60"
+                Canvas.Top="107"
+                Width="1920"
+                Height="957"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Source="/img/PelleteuseDroite.png"
+                VerticalAlignment="Top"
+                Source="/img/sol.png"
                 Stretch="Fill" />
-            <Rectangle
-                x:Name="collisionJoueur"
-                Canvas.Left="370"
-                Canvas.Top="47"
-                Width="60"
-                Height="60" />
+
             <Rectangle
                 x:Name="bloc"
                 Canvas.Left="513"
@@ -40,28 +33,12 @@
                 Height="64"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Stroke="Black">
+                Stroke="Black"
+                Visibility="Hidden">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/img/Terre.png" />
                 </Rectangle.Fill>
             </Rectangle>
-            <Image
-                x:Name="imgSolGauche"
-                Canvas.Top="107"
-                Width="1920"
-                Height="957"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Source="/img/sol.png"
-                Stretch="Fill" />
-            <Rectangle
-                x:Name="solGauche"
-                Canvas.Top="107"
-                Width="577"
-                Height="957"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Stroke="Black" />
             <Rectangle
                 x:Name="solDroit"
                 Canvas.Left="1343"
@@ -74,9 +51,9 @@
             <Rectangle
                 x:Name="solBas"
                 Canvas.Left="577"
-                Canvas.Top="812"
+                Canvas.Top="936"
                 Width="766"
-                Height="252"
+                Height="130"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 RenderTransformOrigin="0.5,0.5"
@@ -90,7 +67,38 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label x:Name="testCollision" Content="Label" Canvas.Left="90" Canvas.Top="47"/>
+            <Label
+                x:Name="testCollision"
+                Canvas.Left="90"
+                Canvas.Top="47"
+                Content="Label" />
+            <Rectangle
+                x:Name="solGauche"
+                Canvas.Top="107"
+                Width="577"
+                Height="957"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Stroke="Black" />
+            <Image
+                x:Name="joueur"
+                Canvas.Left="930"
+                Canvas.Top="47"
+                Width="60"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Source="/img/PelleteuseDroite.png"
+                Stretch="Fill" />
+            <Rectangle
+                x:Name="collisionJoueur"
+                Canvas.Left="930"
+                Canvas.Top="47"
+                Width="60"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top" />
+            <Label x:Name="testHauteur" Content="Label" Canvas.Left="230" Canvas.Top="50"/>
         </Canvas>
     </Grid>
 </Window>
