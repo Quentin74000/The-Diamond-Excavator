@@ -28,7 +28,7 @@
                 Canvas.Top="107"
                 Width="64"
                 Height="64"
-                Stroke="Black" Visibility="Hidden">
+                Stroke="Black">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/img/Terre.png" />
                 </Rectangle.Fill>
