@@ -19,14 +19,16 @@ namespace The_Diamond_Excavator
     {
         private static bool gauche, droite, creuse;
         private static int vitesseJoueur = 5;
+        private static int gravite = 10;
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
-        private static DispatcherTimer timer;
+        private static DispatcherTimer minuterie;
+        private static DispatcherTimer collision;
         private static int test=0;
         public MainWindow()
         {
             InitializeComponent();
             InitialisationImages();
-            InitialisationTimer();
+            InitialisationMinuterie();
         }
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
         {
@@ -68,19 +70,38 @@ namespace The_Diamond_Excavator
                 pelleteuseCreuse3 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse3.png"));
             }
         }
-        private void InitialisationTimer()
+        private void InitialisationMinuterie()
         {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(16);
-            timer.Tick += Jeu;
-            timer.Start();
-        }
+            minuterie = new DispatcherTimer();
+            minuterie.Interval = TimeSpan.FromMilliseconds(16);
+            minuterie.Tick += Jeu;
+            minuterie.Start();
 
+            collision = new DispatcherTimer();
+            collision.Interval = TimeSpan.FromMilliseconds(16);
+            collision.Tick += Collision;
+            collision.Start();
+        }
+        private void CreationBlocs(object sender, KeyEventArgs e)
+        {
+            
+        }
+        private void Collision(object sender, EventArgs e)
+        {
+            Rect blocCollision = new Rect(Canvas.GetLeft(bloc), Canvas.GetTop(bloc), bloc.Width, bloc.Height);
+            Rect JoueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
+            if (JoueurCollision.IntersectsWith(blocCollision))
+            {
+                gravite = 0;
+            }
+            else
+            {
+                gravite = 10;
+                Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
+            }
+        }
         private void Jeu(object? sender, EventArgs e)
         {
-            test++;
-            TEST.Content = "test : " + test;
-            Rect JoueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
             if (gauche == true && droite == false)
             {
                 Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) - vitesseJoueur);
@@ -91,16 +112,16 @@ namespace The_Diamond_Excavator
                 Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
                 joueur.Source = pelleteuseDroite;
             }
-            if (creuse == true && droite == false && gauche == false)
-            {
-                joueur.Source = pelleteuseCreuse1;
-                TimeSpan.FromSeconds(1);
-                joueur.Source = pelleteuseCreuse2;
-                TimeSpan.FromSeconds(1);
-                joueur.Source = pelleteuseCreuse3;
-                TimeSpan.FromSeconds(1);
-                joueur.Source = pelleteuseDroite;
-            }
+            //if (creuse == true && droite == false && gauche == false)
+            //{
+            //    joueur.Source = pelleteuseCreuse1;
+            //    TimeSpan.FromSeconds(1);
+            //    joueur.Source = pelleteuseCreuse2;
+            //    TimeSpan.FromSeconds(1);
+            //    joueur.Source = pelleteuseCreuse3;
+            //    TimeSpan.FromSeconds(1);
+            //    joueur.Source = pelleteuseDroite;
+            //}
         }    
     }
 }
