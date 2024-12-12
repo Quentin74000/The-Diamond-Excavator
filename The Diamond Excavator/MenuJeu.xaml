@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:The_Diamond_Excavator"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="MenuJeux"
-    Title="MenuJeux"
-    Width="500"
+    Title="MenuJeu"
+    Width="800"
     Height="450"
     Background="White"
     mc:Ignorable="d">
@@ -15,10 +15,10 @@
 
         <Button
             x:Name="butJouer"
-            Width="252"
-            Height="56"
-            Margin="0,268,0,0"
-            HorizontalAlignment="Center"
+            Width="250"
+            Height="55"
+            Margin="106,249,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="butJouer_Click"
             Content="JOUER"
@@ -26,7 +26,7 @@
             FontSize="16" />
         <Label
             x:Name="labNbVie"
-            Margin="13,124,0,0"
+            Margin="37,124,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Nombre de Vie(s) : "
@@ -36,7 +36,7 @@
             RenderTransformOrigin="0.332,1.594" />
         <Label
             x:Name="labNbBombe"
-            Margin="327,124,0,0"
+            Margin="600,124,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Nombre de Bombe(s) :"
@@ -45,8 +45,8 @@
             RenderTransformOrigin="0.73,1.032" />
         <Label
             x:Name="labNbDiamant"
-            Margin="155,124,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,118,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="Nombre de diamant(s) :"
             FontSize="14"
@@ -64,7 +64,7 @@
         <TextBox
             x:Name="textBoxVie"
             Width="120"
-            Margin="22,174,0,0"
+            Margin="46,165,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text=""
@@ -72,30 +72,75 @@
         <TextBox
             x:Name="textBoxDiamant1"
             Width="120"
-            Margin="172,174,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,165,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text=""
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBoxBombe"
             Width="120"
-            Margin="348,174,0,0"
+            Margin="619,165,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text=""
             TextWrapping="Wrap" />
         <Button
             x:Name="butQuitter"
-            Width="252"
-            Height="56"
-            Margin="0,347,0,0"
-            HorizontalAlignment="Center"
+            Width="250"
+            Height="55"
+            Margin="106,309,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="butQuitter_Click"
             Content="QUITTER"
             FontFamily="Britannic Bold"
             FontSize="16" />
+        <Label
+            x:Name="labVolumeSonMenuJeu"
+            Width="200"
+            Height="35"
+            Margin="479,233,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Volume Son: "
+            FontFamily="Britannic Bold"
+            FontSize="16"
+            RenderTransformOrigin="0.052,0.458" />
+        <Label
+            x:Name="labVolumeMusiqueMenuJeu"
+            Width="200"
+            Height="34"
+            Margin="479,309,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Volume Musique: "
+            FontFamily="Britannic Bold"
+            FontSize="16" />
+        <Slider
+            x:Name="sliderVolumeMusiqueMenuJeu"
+            Width="200"
+            Height="32"
+            Margin="479,354,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Maximum="100"
+            Minimum="0"
+            IsSnapToTickEnabled="true"
+            TickFrequency="10"
+            ValueChanged="sliderVolumeMusiqueMenuJeu_ValueChanged" />
+        <Slider
+            x:Name="sliderVolumeSonMenuJeu"
+            Width="200"
+            Height="32"
+            Margin="479,268,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Maximum="100"
+            Minimum="0"
+            IsSnapToTickEnabled="true"
+            TickFrequency="10"
+            ValueChanged="sliderVolumeSonMenuJeu_ValueChanged" />
 
     </Grid>
 </Window>
