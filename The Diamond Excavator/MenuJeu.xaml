@@ -124,11 +124,12 @@
             Margin="479,354,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            IsSnapToTickEnabled="true"
             Maximum="100"
             Minimum="0"
-            IsSnapToTickEnabled="true"
             TickFrequency="10"
-            ValueChanged="sliderVolumeMusiqueMenuJeu_ValueChanged" />
+            ValueChanged="sliderVolumeMusiqueMenuJeu_ValueChanged"
+            Value="50" />
         <Slider
             x:Name="sliderVolumeSonMenuJeu"
             Width="200"
@@ -136,11 +137,12 @@
             Margin="479,268,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            IsSnapToTickEnabled="true"
             Maximum="100"
             Minimum="0"
-            IsSnapToTickEnabled="true"
             TickFrequency="10"
-            ValueChanged="sliderVolumeSonMenuJeu_ValueChanged" />
+            ValueChanged="sliderVolumeSonMenuJeu_ValueChanged"
+            Value="50" />
 
     </Grid>
 </Window>

@@ -22,52 +22,54 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class MenuJeu : Window
     {
-        private static SoundPlayer sonDeFond;
-        private static MediaPlayer musique;
+        private static MediaPlayer musiqueFond;
+        private double volume;
+
         public MenuJeu()
         {
             InitializeComponent();
-            //SonDeFond();
-        }
+            InitMusique();
 
+        }
+        public void InitMusique()
+        {
+            musiqueFond = new MediaPlayer();
+            musiqueFond.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/MusiqueFond.mp3"));
+            musiqueFond.MediaEnded += RelanceMusique;
+            musiqueFond.Play();
+        }
+        public void Volume(double volume)
+        {
+            musiqueFond.Play();
+            musiqueFond.Volume = volume / 10;
+        }
+        public static void RelanceMusique(object? sender, EventArgs e)
+        {
+            musiqueFond.Position = TimeSpan.Zero;
+            musiqueFond.Play();
+        }
         private void butJouer_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }
-
         private void butQuitter_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
-        private void sliderVolumeSonMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public void sliderVolumeSonMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             string valeurSliderMusique = "";
             valeurSliderMusique = sliderVolumeSonMenuJeu.Value.ToString();
             labVolumeSonMenuJeu.Content = ("Volume Son: " + valeurSliderMusique + "%");
         }
-
-        private void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             string valeurSliderMusique = "";
             valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value.ToString();
             labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
-          
+            volume = sliderVolumeMusiqueMenuJeu.Value;
+            Volume(volume);
+            Console.WriteLine(volume);
         }
-        //private void SonDeFond()
-        //{
-        //    sonDeFond = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/The Diamond Excavator/son/MusiqueFond.wav")).Stream);
-
-        //    // Lire le fichier en arrière-plan (asynchrone)
-        //    sonDeFond.PlayLooping();  // Pour lire en boucle
-        //                              // player.Play();      // Pour lire une seule fois
-
-        //}
-        //private void RelanceMusique(object? sender, EventArgs e)
-        //{
-        //    musique.Position = TimeSpan.Zero;
-        //    musique.Play();
-        //}
-
     }
 }
