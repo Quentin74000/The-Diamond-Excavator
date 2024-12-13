@@ -27,7 +27,7 @@ namespace The_Diamond_Excavator
         public MenuJeu()
         {
             InitializeComponent();
-            SonDeFond();
+            //SonDeFond();
         }
 
         private void butJouer_Click(object sender, RoutedEventArgs e)
@@ -54,20 +54,20 @@ namespace The_Diamond_Excavator
             labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
           
         }
-        private void SonDeFond()
-        {
-            sonDeFond = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/The Diamond Excavator/son/MusiqueFond.wav")).Stream);
+        //private void SonDeFond()
+        //{
+        //    sonDeFond = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/The Diamond Excavator/son/MusiqueFond.wav")).Stream);
 
-            // Lire le fichier en arrière-plan (asynchrone)
-            sonDeFond.PlayLooping();  // Pour lire en boucle
-                                      // player.Play();      // Pour lire une seule fois
+        //    // Lire le fichier en arrière-plan (asynchrone)
+        //    sonDeFond.PlayLooping();  // Pour lire en boucle
+        //                              // player.Play();      // Pour lire une seule fois
 
-        }
-        private void RelanceMusique(object? sender, EventArgs e)
-        {
-            musique.Position = TimeSpan.Zero;
-            musique.Play();
-        }
+        //}
+        //private void RelanceMusique(object? sender, EventArgs e)
+        //{
+        //    musique.Position = TimeSpan.Zero;
+        //    musique.Play();
+        //}
 
     }
 }

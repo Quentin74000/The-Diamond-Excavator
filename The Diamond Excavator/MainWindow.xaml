@@ -75,17 +75,18 @@
             <Rectangle
                 x:Name="solGauche"
                 Canvas.Top="107"
+                Canvas.Left="0"
                 Width="577"
                 Height="957"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Stroke="Black" />
+                Stroke="Black"/>
             <Image
                 x:Name="joueur"
                 Canvas.Left="930"
-                Canvas.Top="47"
-                Width="60"
-                Height="60"
+                Canvas.Top="57"
+                Width="50"
+                Height="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Source="/img/PelleteuseDroite.png"
@@ -93,12 +94,11 @@
             <Rectangle
                 x:Name="collisionJoueur"
                 Canvas.Left="930"
-                Canvas.Top="47"
-                Width="60"
-                Height="60"
+                Canvas.Top="57"
+                Width="50"
+                Height="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top" />
-            <Label x:Name="testHauteur" Content="Label" Canvas.Left="230" Canvas.Top="50"/>
         </Canvas>
     </Grid>
 </Window>

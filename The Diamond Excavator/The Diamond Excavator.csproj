@@ -23,6 +23,10 @@
     <None Remove="img\PelleteuseGauche.png" />
     <None Remove="img\sol.png" />
     <None Remove="img\Terre.png" />
+    <None Remove="son\bruitChantier.wav" />
+    <None Remove="son\explosionGrenade.wav" />
+    <None Remove="son\explosionNuke.wav" />
+    <None Remove="son\MusiqueFond.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +67,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Terre.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="son\bruitChantier.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="son\explosionGrenade.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="son\explosionNuke.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="son\MusiqueFond.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
