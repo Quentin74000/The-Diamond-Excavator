@@ -17,7 +17,7 @@ namespace The_Diamond_Excavator
     {
         private static bool gauche, droite, creuse, saute;
         private static int vitesseJoueur = 6;
-        private static int gravite = 10;
+        private static int gravite = 50;
         private static int saut = 100;
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
         private static DispatcherTimer minuterie;
@@ -135,7 +135,7 @@ namespace The_Diamond_Excavator
         
             if (blocClique != null)
             {
-                Rect joueurRect = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
+                Rect joueurRect = new Rect(Canvas.GetLeft(joueur)-joueur.Width, Canvas.GetTop(joueur)-joueur.Height, joueur.Width*2, joueur.Height*2);
                 Rect blocRect = new Rect(Canvas.GetLeft(blocClique), Canvas.GetTop(blocClique), blocClique.Width, blocClique.Height);
                 if (joueurRect.IntersectsWith(blocRect))
                 {
@@ -149,8 +149,8 @@ namespace The_Diamond_Excavator
             Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
 
             // Rectangles de collision corrigés
-            Rect solGaucheCollision = new Rect(Canvas.GetLeft(solGauche), Canvas.GetTop(solGauche), solGauche.Width, solGauche.Height);
-            Rect solDroitCollision = new Rect(Canvas.GetLeft(solDroit), Canvas.GetTop(solDroit), solDroit.Width, solDroit.Height);
+            Rect solGaucheCollision = new Rect(Canvas.GetLeft(solGauche), Canvas.GetTop(solGauche), solGauche.Width, 5);
+            Rect solDroitCollision = new Rect(Canvas.GetLeft(solDroit), Canvas.GetTop(solDroit), solDroit.Width, 5);
             Rect solBasCollision = new Rect(Canvas.GetLeft(solBas), Canvas.GetTop(solBas), solBas.Width, solBas.Height);
 
             bool collisionDetectee = false;
@@ -193,8 +193,6 @@ namespace The_Diamond_Excavator
                 collisionDetectee = true;
                 gravite = 0;
             }
-
-            // Appliquer la gravité si aucune collision n'est détectée
             if (!collisionDetectee)
             {
                 testCollision.Content = "Pas de collision";
@@ -230,7 +228,7 @@ namespace The_Diamond_Excavator
             }
             if (droite && !gauche && !bloqueDroite)
             {
-                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || Canvas.GetLeft(joueur) <= solDroit.ActualWidth + solGauche.ActualWidth + 140)
+                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || Canvas.GetLeft(joueur) <= solDroit.ActualWidth + solGauche.ActualWidth + 140 && Canvas.GetLeft(joueur) < this.ActualWidth - joueur.ActualWidth)
                 {
                     Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
                 }

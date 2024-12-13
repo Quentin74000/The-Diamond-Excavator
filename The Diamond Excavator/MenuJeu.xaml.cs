@@ -40,8 +40,8 @@ namespace The_Diamond_Excavator
         }
         public void Volume(double volume)
         {
-            musiqueFond.Play();
-            musiqueFond.Volume = volume / 10;
+            //musiqueFond.Play();
+            //musiqueFond.Volume = volume / 10;
         }
         public static void RelanceMusique(object? sender, EventArgs e)
         {
