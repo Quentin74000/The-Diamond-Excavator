@@ -78,9 +78,12 @@
     <Resource Include="son\explosionNuke.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="son\MusiqueFond.wav">
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="son\MusiqueFond.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
 
 </Project>

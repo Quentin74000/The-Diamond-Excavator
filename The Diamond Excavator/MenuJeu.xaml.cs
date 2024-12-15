@@ -28,8 +28,6 @@ namespace The_Diamond_Excavator
         public MenuJeu()
         {
             InitializeComponent();
-            InitMusique();
-
         }
         public void InitMusique()
         {
@@ -40,8 +38,7 @@ namespace The_Diamond_Excavator
         }
         public void Volume(double volume)
         {
-            //musiqueFond.Play();
-            //musiqueFond.Volume = volume / 10;
+            musiqueFond.Volume = volume / 100;
         }
         public static void RelanceMusique(object? sender, EventArgs e)
         {
@@ -58,18 +55,22 @@ namespace The_Diamond_Excavator
         }
         public void sliderVolumeSonMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            string valeurSliderMusique = "";
-            valeurSliderMusique = sliderVolumeSonMenuJeu.Value.ToString();
+            double valeurSliderMusique = 0;
+            valeurSliderMusique = sliderVolumeSonMenuJeu.Value;
             labVolumeSonMenuJeu.Content = ("Volume Son: " + valeurSliderMusique + "%");
         }
         public void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            string valeurSliderMusique = "";
-            valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value.ToString();
+            double valeurSliderMusique = 0.5 ;
+            valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value;
             labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
-            volume = sliderVolumeMusiqueMenuJeu.Value;
-            Volume(volume);
-            Console.WriteLine(volume);
+            if (musiqueFond != null)
+            {
+                InitMusique();
+            }
+            musiqueFond.Volume = valeurSliderMusique;
+            //Volume(valeurSliderMusique);
+            Console.WriteLine(valeurSliderMusique);
         }
     }
 }
