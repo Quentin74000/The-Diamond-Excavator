@@ -17,7 +17,7 @@ namespace The_Diamond_Excavator
     {
         private static bool gauche, droite, creuse, saute;
         private static int vitesseJoueur = 6;
-        private static int gravite = 50;
+        private static int gravite = 15;
         private static int saut = 100;
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
         private static DispatcherTimer minuterie;
@@ -148,17 +148,16 @@ namespace The_Diamond_Excavator
         {
             Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
 
-            // Rectangles de collision corrigés
             Rect solGaucheCollision = new Rect(Canvas.GetLeft(solGauche), Canvas.GetTop(solGauche), solGauche.Width, 5);
             Rect solDroitCollision = new Rect(Canvas.GetLeft(solDroit), Canvas.GetTop(solDroit), solDroit.Width, 5);
             Rect solBasCollision = new Rect(Canvas.GetLeft(solBas), Canvas.GetTop(solBas), solBas.Width, solBas.Height);
 
             bool collisionDetectee = false;
 
-            // Collision avec les blocs
             foreach (Rectangle nouveauBloc in blocs)
             {
                 Rect blocCollision = new Rect(Canvas.GetLeft(nouveauBloc) + 16, Canvas.GetTop(nouveauBloc), 32, 5);
+
                 if (joueurCollision.IntersectsWith(blocCollision))
                 {
                     if (creuse)
@@ -170,33 +169,35 @@ namespace The_Diamond_Excavator
                     testCollision.Content = "Collision avec un bloc";
                     gravite = 0;
                     collisionDetectee = true;
+                    Canvas.SetTop(joueur, Canvas.GetTop(nouveauBloc) - joueur.ActualHeight);
                     break;
                 }
             }
-
-            // Collision avec les sols
             if (joueurCollision.IntersectsWith(solGaucheCollision))
             {
                 testCollision.Content = "Collision avec le sol gauche";
                 collisionDetectee = true;
                 gravite = 0;
+                Canvas.SetTop(joueur, Canvas.GetTop(solGauche) - joueur.ActualHeight);
             }
             else if (joueurCollision.IntersectsWith(solDroitCollision))
             {
                 testCollision.Content = "Collision avec le sol droit";
                 collisionDetectee = true;
                 gravite = 0;
+                Canvas.SetTop(joueur, Canvas.GetTop(solDroit) - joueur.ActualHeight);
             }
             else if (joueurCollision.IntersectsWith(solBasCollision))
             {
                 testCollision.Content = "Collision avec le sol bas";
                 collisionDetectee = true;
                 gravite = 0;
+                Canvas.SetTop(joueur, Canvas.GetTop(solBas) - joueur.ActualHeight);
             }
             if (!collisionDetectee)
             {
                 testCollision.Content = "Pas de collision";
-                gravite = 10;
+                gravite = 15;
                 Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
             }
         }
@@ -220,17 +221,24 @@ namespace The_Diamond_Excavator
             }
             if (gauche && !droite && !bloqueGauche)
             {
-                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solGauche) || Canvas.GetLeft(joueur) >= solGauche.ActualWidth)
+                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solGauche) || (Canvas.GetLeft(joueur) >= solGauche.ActualWidth && Canvas.GetLeft(joueur) > 0))
                 {
-                    Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) - vitesseJoueur);
+                    if (Canvas.GetLeft(joueur) - vitesseJoueur >= 0)
+                    {
+                        Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) - vitesseJoueur);
+                    }
                 }
                 joueur.Source = pelleteuseGauche;
             }
+
             if (droite && !gauche && !bloqueDroite)
             {
-                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || Canvas.GetLeft(joueur) <= solDroit.ActualWidth + solGauche.ActualWidth + 140 && Canvas.GetLeft(joueur) < this.ActualWidth - joueur.ActualWidth)
+                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || (Canvas.GetLeft(joueur) <= solDroit.ActualWidth + solGauche.ActualWidth + 140 && Canvas.GetLeft(joueur) < this.ActualWidth - joueur.ActualWidth))
                 {
-                    Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
+                    if (Canvas.GetLeft(joueur) + vitesseJoueur <= this.ActualWidth - joueur.ActualWidth)
+                    {
+                        Canvas.SetLeft(joueur, Canvas.GetLeft(joueur) + vitesseJoueur);
+                    }
                 }
                 joueur.Source = pelleteuseDroite;
             }

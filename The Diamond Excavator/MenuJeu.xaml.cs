@@ -61,16 +61,16 @@ namespace The_Diamond_Excavator
         }
         public void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double valeurSliderMusique = 0.5 ;
-            valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value;
-            labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
-            if (musiqueFond != null)
-            {
-                InitMusique();
-            }
-            musiqueFond.Volume = valeurSliderMusique;
-            //Volume(valeurSliderMusique);
-            Console.WriteLine(valeurSliderMusique);
+            //double valeurSliderMusique = 0.5 ;
+            //valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value;
+            //labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
+            //if (musiqueFond != null)
+            //{
+            //    InitMusique();
+            //}
+            //musiqueFond.Volume = valeurSliderMusique;
+            ////Volume(valeurSliderMusique);
+            //Console.WriteLine(valeurSliderMusique);
         }
     }
 }
