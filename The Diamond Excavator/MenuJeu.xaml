@@ -129,7 +129,7 @@
             Minimum="0"
             TickFrequency="10"
             ValueChanged="sliderVolumeMusiqueMenuJeu_ValueChanged"
-            Value="50" />
+            Value="10" />
         <Slider
             x:Name="sliderVolumeSonMenuJeu"
             Width="200"
@@ -142,7 +142,7 @@
             Minimum="0"
             TickFrequency="10"
             ValueChanged="sliderVolumeSonMenuJeu_ValueChanged"
-            Value="50" />
+            Value="30" />
 
     </Grid>
 </Window>
