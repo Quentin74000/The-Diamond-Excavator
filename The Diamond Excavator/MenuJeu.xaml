@@ -9,7 +9,7 @@
     Title="MenuJeu"
     Width="800"
     Height="450"
-    Background="White"
+    Background="#FFF0F12C"
     mc:Ignorable="d">
     <Grid x:Name="textBoxDiamant">
 

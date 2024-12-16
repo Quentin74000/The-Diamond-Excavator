@@ -15,6 +15,8 @@ namespace The_Diamond_Excavator
 {
     public partial class MainWindow : Window
     {
+        private static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
+
         private static bool gauche, droite, creuse, saute, pause;
         private static int vitesseJoueur = 6;
         private static int gravite = 15;
@@ -37,6 +39,8 @@ namespace The_Diamond_Excavator
             InitialisationImages();
             InitialisationMinuterie();
             CreationBlocs();
+            InitMusique();
+            InitSon();
         }
 
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
@@ -136,7 +140,6 @@ namespace The_Diamond_Excavator
         private void BlocClique(object sender, MouseButtonEventArgs e)
         {
             Rectangle blocClique = sender as Rectangle;
-        
             if (blocClique != null)
             {
                 Rect joueurRect = new Rect(Canvas.GetLeft(joueur)-joueur.Width, Canvas.GetTop(joueur)-joueur.Height, joueur.Width*3, joueur.Height*3);
@@ -151,7 +154,6 @@ namespace The_Diamond_Excavator
         private void Collision(object sender, EventArgs e)
         {
             Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
-
             Rect solGaucheCollision = new Rect(Canvas.GetLeft(solGauche), Canvas.GetTop(solGauche), solGauche.Width, 5);
             Rect solDroitCollision = new Rect(Canvas.GetLeft(solDroit), Canvas.GetTop(solDroit), solDroit.Width, 5);
             Rect solBasCollision = new Rect(Canvas.GetLeft(solBas), Canvas.GetTop(solBas), solBas.Width, solBas.Height);
@@ -267,5 +269,47 @@ namespace The_Diamond_Excavator
                 InitialisationMinuterie();
             }
         }
+        // PARTIE MUSIQUE / SON
+        public static void InitMusique()
+        {
+            musiqueFond = new MediaPlayer();
+            musiqueFond.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/MusiqueFond.mp3"));
+            musiqueFond.MediaEnded += RelanceMusique;
+            musiqueFond.Play();
+            musiqueFond.Volume = 0.1;
+        }
+        public static void InitSon()
+        {
+            musiqueSon = new MediaPlayer();
+            musiqueSon.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueSon.mp3"));
+            musiqueSon.MediaEnded += RelanceSon;
+            musiqueSon.Play();
+            musiqueSon.Volume = 0.3;
+        }
+        public static void RelanceMusique(object? sender, EventArgs e)
+        {
+            musiqueFond.Position = TimeSpan.Zero;
+            musiqueFond.Play();
+        }
+        public static void RelanceSon(object? sender, EventArgs e)
+        {
+            musiqueSon.Position = TimeSpan.Zero;
+            musiqueSon.Play();
+        }
+        public static void VolumeMusique(double volumeMusique)
+        {
+            if (musiqueFond != null)
+            {
+                musiqueFond.Volume = volumeMusique / 100;
+            }
+        }
+        public static void VolumeSon(double VolumeSon)
+        {
+            if (musiqueSon != null)
+            {
+                musiqueSon.Volume = VolumeSon / 100;
+            }
+        }
+
     }
 }

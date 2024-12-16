@@ -22,54 +22,14 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class MenuJeu : Window
     {
-        private static MediaPlayer musiqueFond, musiqueSon;
-        private double volumeMusique;
+        public static double VOLUME_MUSIQUE;
+        public static double VOLUME_SON;
 
         public MenuJeu()
         {
             InitializeComponent();
-            InitMusique();
-            InitSon();
-        }
-        public void InitMusique()
-        {
-            musiqueFond = new MediaPlayer();
-            musiqueFond.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/MusiqueFond.mp3"));
-            musiqueFond.MediaEnded += RelanceMusique;
-            musiqueFond.Play();
-            musiqueFond.Volume = 0.1;
-        }
-        public void InitSon()
-        {
-            musiqueSon = new MediaPlayer();
-            musiqueSon.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueSon.mp3"));
-            musiqueSon.MediaEnded += RelanceSon;
-            musiqueSon.Play();
-            musiqueSon.Volume = 0.3;
-        }
-        public void VolumeMusique(double volumeMusique)
-        {
-            if (musiqueFond != null)
-            {
-                musiqueFond.Volume = volumeMusique / 100; 
-            }
-        }
-        public void VolumeSon(double VolumeSon)
-        {
-            if ( musiqueSon != null)
-            {
-                musiqueSon.Volume = VolumeSon / 100;
-            }
-        }
-        public static void RelanceMusique(object? sender, EventArgs e)
-        {
-            musiqueFond.Position = TimeSpan.Zero;
-            musiqueFond.Play();
-        }
-        public static void RelanceSon(object? sender, EventArgs e)
-        {
-            musiqueSon.Position = TimeSpan.Zero;
-            musiqueSon.Play();
+            MainWindow.InitMusique();
+            MainWindow.InitSon();
         }
         private void butJouer_Click(object sender, RoutedEventArgs e)
         {
@@ -81,15 +41,15 @@ namespace The_Diamond_Excavator
         }
         public void sliderVolumeSonMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double valeurSliderSon = sliderVolumeSonMenuJeu.Value;
-            labVolumeSonMenuJeu.Content = ("Volume Son: " + valeurSliderSon + "%");
-            VolumeSon(valeurSliderSon);
+            VOLUME_SON = sliderVolumeSonMenuJeu.Value;
+            labVolumeSonMenuJeu.Content = ("Volume Son: " + VOLUME_SON + "%");
+            MainWindow.VolumeSon(VOLUME_SON);
         }
         public void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double valeurSliderMusique = sliderVolumeMusiqueMenuJeu.Value;
-            labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + valeurSliderMusique + "%");
-            VolumeMusique(valeurSliderMusique);
+            VOLUME_MUSIQUE = sliderVolumeMusiqueMenuJeu.Value;
+            labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + VOLUME_MUSIQUE + "%");
+            MainWindow.VolumeMusique(VOLUME_MUSIQUE);
         }
     }
 }

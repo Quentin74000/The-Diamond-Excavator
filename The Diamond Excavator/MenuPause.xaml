@@ -9,18 +9,19 @@
     Title="MenuyPause"
     Width="500"
     Height="450"
+    Background="Black"
     mc:Ignorable="d">
     <Grid>
         <Label
             x:Name="labVolumeSon"
-            Width="100"
+            Width="200"
             Height="35"
             Margin="60,52,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Voume son :"
+            Content="Volume Son: "
             FontFamily="Britannic Bold"
-            FontSize="16" />
+            FontSize="16" Foreground="White" />
         <Button
             x:Name="butReprendrePause"
             Width="196"
@@ -31,7 +32,7 @@
             Click="butReprendrePause_Click"
             Content="REPRENDRE"
             FontFamily="Britannic Bold"
-            FontSize="18" />
+            FontSize="18" Foreground="White" Background="{x:Null}" />
         <Button
             x:Name="butQuitterPause"
             Width="196"
@@ -42,16 +43,16 @@
             Click="butQuitterPause_Click"
             Content="QUITTER"
             FontFamily="Britannic Bold"
-            FontSize="18" />
+            FontSize="18" Foreground="White" Background="{x:Null}" />
         <Label
             x:Name="labVolumeMusique"
             Height="35"
             Margin="60,137,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Volume Musique :"
+            Content="Volume Musique: "
             FontFamily="Britannic Bold"
-            FontSize="16" />
+            FontSize="16" Width="200" Foreground="White" />
         <Slider
             x:Name="sliderVolumeMusique"
             Width="200"
@@ -64,7 +65,7 @@
             Minimum="0"
             TickFrequency="10"
             TickPlacement="TopLeft"
-            ValueChanged="sliderVolumeMusique_ValueChanged" />
+            ValueChanged="sliderVolumeMusique_ValueChanged" Value="10" />
         <Slider
             x:Name="sliderVolumeSon"
             Width="200"
@@ -77,6 +78,6 @@
             Minimum="0"
             TickFrequency="10"
             TickPlacement="TopLeft"
-            ValueChanged="sliderVolumeSon_ValueChanged" />
+            ValueChanged="sliderVolumeSon_ValueChanged" Value="30" />
     </Grid>
 </Window>
