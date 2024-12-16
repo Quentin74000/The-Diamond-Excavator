@@ -15,19 +15,22 @@ namespace The_Diamond_Excavator
 {
     public partial class MainWindow : Window
     {
-        private static bool gauche, droite, creuse, saute;
+        private static bool gauche, droite, creuse, saute, pause;
         private static int vitesseJoueur = 6;
         private static int gravite = 15;
         private static int saut = 100;
+        private static int chrono = 0;
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
         private static DispatcherTimer minuterie;
         private static DispatcherTimer collision;
+        private static DispatcherTimer chronometre;
         private static int decalageBloc = 64;
         private List<Rectangle> blocs = new List<Rectangle>();
+        MenuPause fenetrePause = new MenuPause();
+        MenuJeu fenetreMenu = new MenuJeu();
 
         public MainWindow()
         {
-            MenuJeu fenetreMenu = new MenuJeu();
             fenetreMenu.ShowDialog();
 
             InitializeComponent();
@@ -46,13 +49,13 @@ namespace The_Diamond_Excavator
             {
                 droite = true;
             }
-            if (Key.Down == e.Key)
-            {
-                creuse = true;
-            }
             if (Key.Up == e.Key)
             {
                 saute = true;
+            }
+            if (Key.Escape == e.Key)
+            {
+                pause = true;
             }
         }
 
@@ -65,10 +68,6 @@ namespace The_Diamond_Excavator
             if (Key.Right == e.Key)
             {
                 droite = false;
-            }
-            if (Key.Down == e.Key)
-            {
-                creuse = false;
             }
             if (Key.Up == e.Key)
             {
@@ -98,6 +97,11 @@ namespace The_Diamond_Excavator
             collision.Interval = TimeSpan.FromMilliseconds(16);
             collision.Tick += Collision;
             collision.Start();
+
+            chronometre = new DispatcherTimer();
+            chronometre.Interval = TimeSpan.FromSeconds(1);
+            chronometre.Tick += Chronometre;
+            chronometre.Start();
         }
 
         public void CreationBlocs()
@@ -135,7 +139,7 @@ namespace The_Diamond_Excavator
         
             if (blocClique != null)
             {
-                Rect joueurRect = new Rect(Canvas.GetLeft(joueur)-joueur.Width, Canvas.GetTop(joueur)-joueur.Height, joueur.Width*2, joueur.Height*2);
+                Rect joueurRect = new Rect(Canvas.GetLeft(joueur)-joueur.Width, Canvas.GetTop(joueur)-joueur.Height, joueur.Width*3, joueur.Height*3);
                 Rect blocRect = new Rect(Canvas.GetLeft(blocClique), Canvas.GetTop(blocClique), blocClique.Width, blocClique.Height);
                 if (joueurRect.IntersectsWith(blocRect))
                 {
@@ -160,12 +164,6 @@ namespace The_Diamond_Excavator
 
                 if (joueurCollision.IntersectsWith(blocCollision))
                 {
-                    if (creuse)
-                    {
-                        zoneJeu.Children.Remove(nouveauBloc);
-                        blocs.Remove(nouveauBloc);
-                        break;
-                    }
                     testCollision.Content = "Collision avec un bloc";
                     gravite = 0;
                     collisionDetectee = true;
@@ -202,10 +200,18 @@ namespace The_Diamond_Excavator
             }
         }
 
+        private void Chronometre(object? sender, EventArgs e)
+        {
+            chrono++;
+            lab_chronometre.Content = chrono;
+        }
+
         private void Jeu(object? sender, EventArgs e)
         {
             bool bloqueGauche = false;
             bool bloqueDroite = false;
+            bool enSaut = false;
+            int enSautValeur = 0;
             Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
             foreach (Rectangle bloc in blocs)
             {
@@ -244,7 +250,21 @@ namespace The_Diamond_Excavator
             }
             if (saute && gravite == 0)
             {
+                enSaut = true;
                 Canvas.SetTop(joueur, Canvas.GetTop(joueur) - saut);
+            }
+            if (pause)
+            {
+                if (minuterie.IsEnabled && chronometre.IsEnabled)
+                {
+                    minuterie.Stop();
+                    chronometre.Stop();
+                }
+                fenetrePause.ShowDialog();
+            }
+            if (fenetrePause.DialogResult == true)
+            {
+                InitialisationMinuterie();
             }
         }
     }

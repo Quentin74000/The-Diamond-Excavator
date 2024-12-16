@@ -99,6 +99,7 @@
                 Height="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top" />
+            <Label x:Name="lab_chronometre" Content="0" Canvas.Left="1872" Canvas.Top="10"/>
         </Canvas>
     </Grid>
 </Window>
