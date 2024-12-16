@@ -28,6 +28,7 @@ namespace The_Diamond_Excavator
         private static DispatcherTimer chronometre;
         private static int decalageBloc = 64;
         private List<Rectangle> blocs = new List<Rectangle>();
+        private List<Rectangle> bombes = new List<Rectangle>();
         MenuPause fenetrePause = new MenuPause();
         MenuJeu fenetreMenu = new MenuJeu();
 
@@ -39,6 +40,7 @@ namespace The_Diamond_Excavator
             InitialisationImages();
             InitialisationMinuterie();
             CreationBlocs();
+            CreationBombes();
             InitMusique();
             InitSon();
         }
@@ -136,6 +138,28 @@ namespace The_Diamond_Excavator
                 }
                 totalDecalageVertical += decalageBloc;
             }
+        }
+        private void CreationBombes()
+        {
+            Random random = new Random();
+            int nbBombe = 0;
+            do
+            {
+                int decalage = 64, ligne = random.Next(1, 14), colonne = random.Next(1, 13);
+                Rectangle nouvelleBombe = new Rectangle
+                {
+                    Tag = "nouvelleBombe",
+                    Height = bombe.Height,
+                    Width = bombe.Width,
+                    Stroke = bombe.Stroke,
+                    Fill = bombe.Fill,
+                };
+                Canvas.SetLeft(nouvelleBombe, Canvas.GetLeft(bombe) + colonne * decalage);
+                Canvas.SetTop(nouvelleBombe, Canvas.GetTop(bombe) + ligne * decalage);
+                zoneJeu.Children.Add(nouvelleBombe);
+                bombes.Add(nouvelleBombe);
+                nbBombe++;
+            } while (nbBombe >= 10);
         }
         private void BlocClique(object sender, MouseButtonEventArgs e)
         {

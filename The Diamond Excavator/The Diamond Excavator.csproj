@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="img\Coeur.png" />
     <None Remove="img\Creuser.gif" />
+    <None Remove="img\Dynamite.png" />
     <None Remove="img\Image de fond Menu.jpg" />
     <None Remove="img\Mines.png" />
     <None Remove="img\NIV DIFFICILE BOMBE.png" />
@@ -26,7 +27,9 @@
     <None Remove="son\bruitChantier.wav" />
     <None Remove="son\explosionGrenade.wav" />
     <None Remove="son\explosionNuke.wav" />
+    <None Remove="son\MusiqueFond.mp3" />
     <None Remove="son\MusiqueFond.wav" />
+    <None Remove="son\musiqueSon.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +37,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Creuser.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Dynamite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Image de fond Menu.jpg">
@@ -75,15 +81,12 @@
     <Resource Include="son\explosionNuke.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="son\MusiqueFond.mp3">
+    <Resource Include="son\MusiqueFond.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="son\musiqueSon.mp3">
+    </Resource>
+    <Resource Include="son\musiqueSon.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
 
 </Project>
