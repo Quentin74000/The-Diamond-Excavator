@@ -22,9 +22,6 @@ namespace The_Diamond_Excavator
     public partial class MenuPause : Window
     {
         private static DispatcherTimer chronmetre;
-        public static double VOLUME_SON;
-        public static double VOLUME_MUSIQUE;
-
 
         public MenuPause()
         {
@@ -44,35 +41,23 @@ namespace The_Diamond_Excavator
         public void butReprendrePause_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-           
         }
-
         private void butQuitterPause_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
         private void Raccourci(object sender, KeyEventArgs e)
         {
             if (Key.Escape == e.Key)
             {
-                DialogResult = true;
+                this.Close();
             }
         }
-        public void sliderVolumeSon_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+
+        private void butOptions_Click(object sender, RoutedEventArgs e)
         {
-            VOLUME_SON = sliderVolumeSon.Value;
-            labVolumeSon.Content = ("Volume Son: " + VOLUME_SON + "%");
-            MainWindow.VolumeSon(VOLUME_SON);
+            Options fenetreOptions = new Options();
+            fenetreOptions.ShowDialog();
         }
-
-        public void sliderVolumeMusique_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            VOLUME_MUSIQUE = sliderVolumeMusique.Value;
-            labVolumeMusique.Content = ("Volume Musique: " + VOLUME_MUSIQUE + "%");
-            MainWindow.VolumeMusique(VOLUME_MUSIQUE);
-        }
-
-
     }
 }

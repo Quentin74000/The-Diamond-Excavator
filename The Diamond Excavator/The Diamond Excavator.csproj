@@ -27,9 +27,7 @@
     <None Remove="son\bruitChantier.wav" />
     <None Remove="son\explosionGrenade.wav" />
     <None Remove="son\explosionNuke.wav" />
-    <None Remove="son\MusiqueFond.mp3" />
     <None Remove="son\MusiqueFond.wav" />
-    <None Remove="son\musiqueSon.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,12 +79,15 @@
     <Resource Include="son\explosionNuke.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="son\MusiqueFond.mp3">
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="son\MusiqueFond.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="son\musiqueSon.mp3">
+    </None>
+    <None Update="son\musiqueSon.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@
     Title="MenuJeu"
     Width="800"
     Height="450"
-    Background="#FFF0F12C"
+    Background="#FFD42CF1"
     mc:Ignorable="d">
     <Grid x:Name="textBoxDiamant">
 
@@ -96,53 +96,17 @@
             Content="QUITTER"
             FontFamily="Britannic Bold"
             FontSize="16" />
-        <Label
-            x:Name="labVolumeSonMenuJeu"
-            Width="200"
-            Height="35"
-            Margin="479,233,0,0"
+        <Button
+            x:Name="butOptions"
+            Width="250"
+            Height="55"
+            Margin="429,249,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Volume Son: "
-            FontFamily="Britannic Bold"
-            FontSize="16"
-            RenderTransformOrigin="0.052,0.458" />
-        <Label
-            x:Name="labVolumeMusiqueMenuJeu"
-            Width="200"
-            Height="34"
-            Margin="479,309,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Volume Musique: "
+            Click="butOptions_Click"
+            Content="OPTIONS"
             FontFamily="Britannic Bold"
             FontSize="16" />
-        <Slider
-            x:Name="sliderVolumeMusiqueMenuJeu"
-            Width="200"
-            Height="32"
-            Margin="479,354,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsSnapToTickEnabled="true"
-            Maximum="100"
-            Minimum="0"
-            TickFrequency="10"
-            ValueChanged="sliderVolumeMusiqueMenuJeu_ValueChanged"
-            Value="10" />
-        <Slider
-            x:Name="sliderVolumeSonMenuJeu"
-            Width="200"
-            Height="32"
-            Margin="479,268,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsSnapToTickEnabled="true"
-            Maximum="100"
-            Minimum="0"
-            TickFrequency="10"
-            ValueChanged="sliderVolumeSonMenuJeu_ValueChanged"
-            Value="30" />
 
     </Grid>
 </Window>

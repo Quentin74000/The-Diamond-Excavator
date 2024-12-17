@@ -15,7 +15,7 @@ namespace The_Diamond_Excavator
 {
     public partial class MainWindow : Window
     {
-        private static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
+        public static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
 
         private static bool gauche, droite, creuse, saute, pause;
         private static int vitesseJoueur = 6;
@@ -29,20 +29,23 @@ namespace The_Diamond_Excavator
         private static int decalageBloc = 64;
         private List<Rectangle> blocs = new List<Rectangle>();
         private List<Rectangle> bombes = new List<Rectangle>();
-        MenuPause fenetrePause = new MenuPause();
         MenuJeu fenetreMenu = new MenuJeu();
+        Options fenetreOptions = new Options();
+        MenuPause fenetrePause = new MenuPause();
+
+
 
         public MainWindow()
         {
-            fenetreMenu.ShowDialog();
 
+            fenetreMenu.ShowDialog();
+            
             InitializeComponent();
+
             InitialisationImages();
             InitialisationMinuterie();
-            CreationBlocs();
             CreationBombes();
-            InitMusique();
-            InitSon();
+            CreationBlocs();
         }
 
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
@@ -113,10 +116,10 @@ namespace The_Diamond_Excavator
         public void CreationBlocs()
         {
             int totalDecalageVertical = 0;
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 10; i++)
             {
                 int totalDecalage = 0;
-                for (int j = 0; j < 12; j++)
+                for (int j = 0; j < 17; j++)
                 {
                     Rectangle nouveauBloc = new Rectangle
                     {
@@ -145,7 +148,7 @@ namespace The_Diamond_Excavator
             int nbBombe = 0;
             do
             {
-                int decalage = 64, ligne = random.Next(1, 14), colonne = random.Next(1, 13);
+                int decalage = 64, ligne = random.Next(1, 11), colonne = random.Next(1, 18);
                 Rectangle nouvelleBombe = new Rectangle
                 {
                     Tag = "nouvelleBombe",
@@ -265,7 +268,7 @@ namespace The_Diamond_Excavator
 
             if (droite && !gauche && !bloqueDroite)
             {
-                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || (Canvas.GetLeft(joueur) <= solDroit.ActualWidth + solGauche.ActualWidth + 140 && Canvas.GetLeft(joueur) < this.ActualWidth - joueur.ActualWidth))
+                if (Canvas.GetTop(joueur) <= Canvas.GetTop(solDroit) || (Canvas.GetLeft(joueur) <= solDroit.ActualWidth + solGauche.ActualWidth + 405 && Canvas.GetLeft(joueur) < this.ActualWidth - joueur.ActualWidth))
                 {
                     if (Canvas.GetLeft(joueur) + vitesseJoueur <= this.ActualWidth - joueur.ActualWidth)
                     {
