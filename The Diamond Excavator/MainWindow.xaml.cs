@@ -334,6 +334,5 @@ namespace The_Diamond_Excavator
                 musiqueSon.Volume = VolumeSon / 100;
             }
         }
-
     }
 }
