@@ -22,14 +22,12 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class MenuJeu : Window
     {
-        public static double VOLUME_MUSIQUE;
-        public static double VOLUME_SON;
+        Options fenetreOptions = new Options();
 
         public MenuJeu()
         {
             InitializeComponent();
-            MainWindow.InitMusique();
-            MainWindow.InitSon();
+            
         }
         private void butJouer_Click(object sender, RoutedEventArgs e)
         {
@@ -39,17 +37,9 @@ namespace The_Diamond_Excavator
         {
             Application.Current.Shutdown();
         }
-        public void sliderVolumeSonMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void butOptions_Click(object sender, RoutedEventArgs e)
         {
-            VOLUME_SON = sliderVolumeSonMenuJeu.Value;
-            labVolumeSonMenuJeu.Content = ("Volume Son: " + VOLUME_SON + "%");
-            MainWindow.VolumeSon(VOLUME_SON);
-        }
-        public void sliderVolumeMusiqueMenuJeu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            VOLUME_MUSIQUE = sliderVolumeMusiqueMenuJeu.Value;
-            labVolumeMusiqueMenuJeu.Content = ("Volume Musique: " + VOLUME_MUSIQUE + "%");
-            MainWindow.VolumeMusique(VOLUME_MUSIQUE);
+            fenetreOptions.ShowDialog();
         }
     }
 }

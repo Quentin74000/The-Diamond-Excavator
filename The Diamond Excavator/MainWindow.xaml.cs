@@ -15,7 +15,7 @@ namespace The_Diamond_Excavator
 {
     public partial class MainWindow : Window
     {
-        private static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
+        public static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
 
         private static bool gauche, droite, creuse, saute, pause;
         private static int vitesseJoueur = 6;
@@ -29,20 +29,24 @@ namespace The_Diamond_Excavator
         private static int decalageBloc = 64;
         private List<Rectangle> blocs = new List<Rectangle>();
         private List<Rectangle> bombes = new List<Rectangle>();
-        MenuPause fenetrePause = new MenuPause();
         MenuJeu fenetreMenu = new MenuJeu();
+        Options fenetreOptions = new Options();
+        MenuPause fenetrePause = new MenuPause();
+
+
 
         public MainWindow()
         {
-            fenetreMenu.ShowDialog();
 
+            fenetreMenu.ShowDialog();
+            
             InitializeComponent();
+
             InitialisationImages();
             InitialisationMinuterie();
             CreationBlocs();
             CreationBombes();
-            InitMusique();
-            InitSon();
+          
         }
 
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
