@@ -26,21 +26,21 @@
                 Stretch="Fill" />
             <Rectangle
                 x:Name="solDroit"
-                Canvas.Left="1343"
+                Canvas.Left="1289"
                 Canvas.Top="107"
-                Width="577"
+                Width="631"
                 Height="957"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 Stroke="Black" />
             <Rectangle
                 x:Name="solBas"
-                Canvas.Left="577"
-                Canvas.Top="936"
-                Width="766"
-                Height="130"
+                Canvas.Left="203"
+                Canvas.Top="745"
+                Width="1087"
+                Height="321"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 RenderTransformOrigin="0.5,0.5"
                 Stroke="Black">
                 <Rectangle.RenderTransform>
@@ -61,35 +61,32 @@
                 x:Name="solGauche"
                 Canvas.Top="107"
                 Canvas.Left="0"
-                Width="577"
+                Width="203"
                 Height="957"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
                 Stroke="Black"/>
             <Rectangle
                 x:Name="bombe"
-                Canvas.Left="513"
+                Canvas.Left="139"
                 Canvas.Top="107"
                 Width="64"
                 Height="64"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Stroke="Black"
-                Visibility="Hidden">
+                VerticalAlignment="Center">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="/img/Terre.png" />
+                    <ImageBrush ImageSource="/img/Dynamite.png" />
                 </Rectangle.Fill>
             </Rectangle>
             <Rectangle
                 x:Name="bloc"
-                Canvas.Left="513"
+                Canvas.Left="139"
                 Canvas.Top="107"
                 Width="64"
                 Height="64"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Stroke="Black"
-                Visibility="Hidden">
+                Stroke="Black">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/img/Terre.png" />
                 </Rectangle.Fill>
