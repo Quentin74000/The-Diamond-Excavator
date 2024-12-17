@@ -9,8 +9,10 @@
     Title="MenuJeu"
     Width="400"
     Height="450"
-    Background="#FFD42CF1"
     mc:Ignorable="d">
+    <Window.Background>
+        <ImageBrush ImageSource="/img/FondMenuJeux.png" />
+    </Window.Background>
     <Grid x:Name="textBoxDiamant">
 
         <Button
@@ -23,17 +25,18 @@
             Click="butJouer_Click"
             Content="JOUER"
             FontFamily="Britannic Bold"
-            FontSize="16" />
+            FontSize="20" />
         <Label
             x:Name="NomJeu"
             Width="252"
             Height="41"
-            Margin="0,30,0,0"
+            Margin="0,62,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Background="#FFF9D2D2"
             Content="The Diamond Excavator"
             FontFamily="Britannic Bold"
-            FontSize="20" />
+            FontSize="22" />
         <Button
             x:Name="butQuitter"
             Width="250"
@@ -41,10 +44,11 @@
             Margin="0,318,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Background="#FFDDDDDD"
             Click="butQuitter_Click"
             Content="QUITTER"
             FontFamily="Britannic Bold"
-            FontSize="16" />
+            FontSize="20" />
         <Button
             x:Name="butOptions"
             Width="250"
@@ -55,7 +59,7 @@
             Click="butOptions_Click"
             Content="OPTIONS"
             FontFamily="Britannic Bold"
-            FontSize="16" />
+            FontSize="20" />
 
     </Grid>
 </Window>

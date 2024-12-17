@@ -15,6 +15,8 @@
     <None Remove="img\Creuser.gif" />
     <None Remove="img\Diamant.png" />
     <None Remove="img\Dynamite.png" />
+    <None Remove="img\FondMenuJeux.png" />
+    <None Remove="img\FondMenuPause.png" />
     <None Remove="img\Image de fond Menu.jpg" />
     <None Remove="img\Mines.png" />
     <None Remove="img\NIV DIFFICILE BOMBE.png" />
@@ -51,7 +53,10 @@
     <Resource Include="img\Dynamite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="img\Image de fond Menu.jpg">
+    <Resource Include="img\FondMenuJeux.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\FondMenuPause.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Mines.png">
