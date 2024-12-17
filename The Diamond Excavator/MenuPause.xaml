@@ -9,9 +9,10 @@
     Title="MenuyPause"
     Width="500"
     Height="450"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Background>
-        <ImageBrush ImageSource="/img/FondMenuPause.png"/>
+        <ImageBrush ImageSource="/img/FondMenuPause.png" />
     </Window.Background>
     <Grid>
         <Button

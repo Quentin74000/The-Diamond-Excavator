@@ -9,6 +9,7 @@
     Title="MenuJeu"
     Width="400"
     Height="450"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Background>
         <ImageBrush ImageSource="/img/FondMenuJeux.png" />
