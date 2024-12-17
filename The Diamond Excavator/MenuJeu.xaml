@@ -17,40 +17,13 @@
             x:Name="butJouer"
             Width="250"
             Height="55"
-            Margin="106,249,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,146,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="butJouer_Click"
             Content="JOUER"
             FontFamily="Britannic Bold"
             FontSize="16" />
-        <Label
-            x:Name="labNbVie"
-            Margin="37,124,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Nombre de Vie(s) : "
-            FontSize="14"
-            FontWeight="Bold"
-            Foreground="Black"
-            RenderTransformOrigin="0.332,1.594" />
-        <Label
-            x:Name="labNbBombe"
-            Margin="600,124,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Nombre de Bombe(s) :"
-            FontSize="14"
-            FontWeight="Bold"
-            RenderTransformOrigin="0.73,1.032" />
-        <Label
-            x:Name="labNbDiamant"
-            Margin="0,118,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Content="Nombre de diamant(s) :"
-            FontSize="14"
-            FontWeight="Bold" />
         <Label
             x:Name="NomJeu"
             Width="252"
@@ -61,36 +34,12 @@
             Content="The Diamond Excavator"
             FontFamily="Britannic Bold"
             FontSize="20" />
-        <TextBox
-            x:Name="textBoxVie"
-            Width="120"
-            Margin="46,165,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text=""
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="textBoxDiamant1"
-            Width="120"
-            Margin="0,165,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Text=""
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="textBoxBombe"
-            Width="120"
-            Margin="619,165,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text=""
-            TextWrapping="Wrap" />
         <Button
             x:Name="butQuitter"
             Width="250"
             Height="55"
-            Margin="106,309,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,318,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="butQuitter_Click"
             Content="QUITTER"
@@ -100,8 +49,8 @@
             x:Name="butOptions"
             Width="250"
             Height="55"
-            Margin="429,249,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,217,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="butOptions_Click"
             Content="OPTIONS"
