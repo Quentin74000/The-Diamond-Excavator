@@ -59,13 +59,13 @@
                 Content="Label" />
             <Rectangle
                 x:Name="solGauche"
-                Canvas.Top="107"
                 Canvas.Left="0"
+                Canvas.Top="107"
                 Width="203"
                 Height="957"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Stroke="Black"/>
+                Stroke="Black" />
             <Rectangle
                 x:Name="bombe"
                 Canvas.Left="139"
@@ -73,9 +73,23 @@
                 Width="64"
                 Height="64"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+                Visibility="Hidden">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="/img/Dynamite.png" />
+                    <ImageBrush ImageSource="/img/Bombe.png" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle
+                x:Name="diamant"
+                Canvas.Left="139"
+                Canvas.Top="107"
+                Width="64"
+                Height="64"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Hidden">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/img/Diamant.png" />
                 </Rectangle.Fill>
             </Rectangle>
             <Rectangle
@@ -86,7 +100,8 @@
                 Height="64"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Stroke="Black">
+                Stroke="Black"
+                Visibility="Hidden">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/img/Terre.png" />
                 </Rectangle.Fill>
@@ -109,7 +124,11 @@
                 Height="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top" />
-            <Label x:Name="lab_chronometre" Content="0" Canvas.Left="1872" Canvas.Top="10"/>
+            <Label
+                x:Name="lab_chronometre"
+                Canvas.Left="1872"
+                Canvas.Top="10"
+                Content="0" />
         </Canvas>
     </Grid>
 </Window>

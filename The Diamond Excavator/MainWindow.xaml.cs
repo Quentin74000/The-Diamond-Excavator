@@ -29,6 +29,7 @@ namespace The_Diamond_Excavator
         private static int decalageBloc = 64;
         private List<Rectangle> blocs = new List<Rectangle>();
         private List<Rectangle> bombes = new List<Rectangle>();
+        private List<Rectangle> diamants = new List<Rectangle>();
         MenuJeu fenetreMenu = new MenuJeu();
         Options fenetreOptions = new Options();
         MenuPause fenetrePause = new MenuPause();
@@ -41,8 +42,9 @@ namespace The_Diamond_Excavator
             InitializeComponent();
             InitialisationImages();
             InitialisationMinuterie();
-            CreationBombes();
             CreationBlocs();
+            CreationDiamants();
+            CreationBombes();
         }
 
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
@@ -142,10 +144,10 @@ namespace The_Diamond_Excavator
         private void CreationBombes()
         {
             Random random = new Random();
-            int nbBombe = 0;
+            int decalage = 64, nbBombe = 0;
             do
             {
-                int decalage = 64, ligne = random.Next(1, 11), colonne = random.Next(1, 18);
+                int ligne = random.Next(1, 10), colonne = random.Next(1, 18);
                 Rectangle nouvelleBombe = new Rectangle
                 {
                     Tag = "nouvelleBombe",
@@ -156,10 +158,69 @@ namespace The_Diamond_Excavator
                 };
                 Canvas.SetLeft(nouvelleBombe, Canvas.GetLeft(bombe) + colonne * decalage);
                 Canvas.SetTop(nouvelleBombe, Canvas.GetTop(bombe) + ligne * decalage);
-                zoneJeu.Children.Add(nouvelleBombe);
-                bombes.Add(nouvelleBombe);
-                nbBombe++;
-            } while (nbBombe >= 10);
+                bool dejaExistant = false;
+                foreach (Rectangle bombeExistante in bombes)
+                {
+                    if (Canvas.GetLeft(bombeExistante) == Canvas.GetLeft(nouvelleBombe) &&
+                        Canvas.GetTop(bombeExistante) == Canvas.GetTop(nouvelleBombe))
+                    {
+                        dejaExistant = true;
+                        break;
+                    }
+                }
+                if (!dejaExistant)
+                {
+                    zoneJeu.Children.Add(nouvelleBombe);
+                    diamants.Add(nouvelleBombe);
+                    nbBombe += 1;
+                }
+                else
+                {
+                    continue;
+                }
+            } while (nbBombe < 10);
+        }
+        private void CreationDiamants()
+        {
+            Random random = new Random();
+            int decalage = 64, nbDiamants = 0;
+            do
+            {
+                int ligne = random.Next(1, 10), colonne = random.Next(1, 18);
+                Rectangle nouveauDiamant = new Rectangle
+                {
+                    Tag = "nouveauDiamant",
+                    Height = diamant.Height,
+                    Width = diamant.Width,
+                    Stroke = diamant.Stroke,
+                    Fill = diamant.Fill,
+                };
+                Canvas.SetLeft(nouveauDiamant, Canvas.GetLeft(diamant) + colonne * decalage);
+                Canvas.SetTop(nouveauDiamant, Canvas.GetTop(diamant) + ligne * decalage);
+
+                bool dejaExistant = false;
+                foreach (Rectangle diamantExistant in diamants)
+                {
+                    if (Canvas.GetLeft(diamantExistant) == Canvas.GetLeft(nouveauDiamant) &&
+                        Canvas.GetTop(diamantExistant) == Canvas.GetTop(nouveauDiamant))
+                    {
+                        dejaExistant = true;
+                        break;
+                    }
+                }
+
+                if (!dejaExistant)
+                {
+                    zoneJeu.Children.Add(nouveauDiamant);
+                    diamants.Add(nouveauDiamant);
+                    nbDiamants+=1;
+                }
+                else
+                {
+                    continue;
+                }
+
+            } while (nbDiamants < 5);
         }
         private void BlocClique(object sender, MouseButtonEventArgs e)
         {

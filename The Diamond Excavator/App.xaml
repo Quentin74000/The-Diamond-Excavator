@@ -1,9 +1,8 @@
-﻿<Application x:Class="The_Diamond_Excavator.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:The_Diamond_Excavator"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+﻿<Application
+    x:Class="The_Diamond_Excavator.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:The_Diamond_Excavator"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources />
 </Application>
