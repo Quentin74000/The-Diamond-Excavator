@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace The_Diamond_Excavator
 {
     /// <summary>
@@ -42,7 +41,6 @@ namespace The_Diamond_Excavator
         {
             if (MainWindow.musiqueSon != null)
             {
-                //MainWindow.musiqueSon.Volume = sliderVolumeSon.Value; // Ajuster le volume en temps réel
                 VOLUME_SON = sliderVolumeSon.Value;
                 labVolumeSon.Content = ("Volume Son: " + VOLUME_SON + "%");
                 MainWindow.VolumeSon(VOLUME_SON);
@@ -53,7 +51,6 @@ namespace The_Diamond_Excavator
         {
             if (MainWindow.musiqueFond != null)
             {
-                //MainWindow.musiqueFond.Volume = sliderVolumeSon.Value; // Ajuster le volume en temps réel
                 VOLUME_MUSIQUE = sliderVolumeMusique.Value;
                 labVolumeMusique.Content = ("Volume Son: " + VOLUME_MUSIQUE + "%");
                 MainWindow.VolumeMusique(VOLUME_MUSIQUE);

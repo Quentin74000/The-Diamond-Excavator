@@ -23,22 +23,34 @@ namespace The_Diamond_Excavator
         private static int saut = 100;
         private static int chrono = 0;
         private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
+        private static int decalageBloc = 64;
+
+        // DÉCLARATION DES CHRONOMETRES
         private static DispatcherTimer minuterie;
         private static DispatcherTimer collision;
         private static DispatcherTimer chronometre;
-        private static int decalageBloc = 64;
+        
+
+        // DÉCLARATION DES LISTES
         private List<Rectangle> blocs = new List<Rectangle>();
         private List<Rectangle> bombes = new List<Rectangle>();
         private List<Rectangle> diamants = new List<Rectangle>();
+
+        // DÉCLARATION FENETRES
         MenuJeu fenetreMenu = new MenuJeu();
+        Niveaux fenetreNiveaux = new Niveaux();
         Options fenetreOptions = new Options();
         MenuPause fenetrePause = new MenuPause();
 
-
+        // DÉCLARATION DES DIFFÉRENTES VARIABLES (BOMBES,DIAMANTS,MINES)
+        public static int NB_BOMBES = 0;
+        public static int NB_MINES = 0;
+        public static int NB_DIAMANTS = 0;
 
         public MainWindow()
         {
             fenetreMenu.ShowDialog();
+            fenetreNiveaux.ShowDialog();
             InitializeComponent();
             InitialisationImages();
             InitialisationMinuterie();
@@ -354,7 +366,38 @@ namespace The_Diamond_Excavator
                 InitialisationMinuterie();
             }
         }
-        // PARTIE MUSIQUE / SON
+                                // NIVEAUX CHOISIT
+        public static void ChoixNiveaux(double niveaux)
+        {
+            if (niveaux == 1)
+            {
+                Console.WriteLine("Niveau 1");
+                NB_BOMBES = 5;
+                NB_MINES = 7;
+                NB_DIAMANTS = 6;
+                //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
+
+            }
+            else if (niveaux == 2)
+            {
+                Console.WriteLine("Niveau 2");
+                NB_BOMBES = 10;
+                NB_MINES = 7;
+                NB_DIAMANTS = 6;
+                //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
+            }
+            else
+            {
+                Console.WriteLine("Niveau 3");
+                NB_BOMBES = 15;
+                NB_MINES = 7;
+                NB_DIAMANTS = 6;
+                //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
+            }
+        }
+                                // PARTIE MUSIQUE / SON
+
+        // INITTIALISATION DE LA MUSIQUE / SON
         public static void InitMusique()
         {
             musiqueFond = new MediaPlayer();
@@ -371,6 +414,7 @@ namespace The_Diamond_Excavator
             musiqueSon.Play();
             musiqueSon.Volume = 0.3;
         }
+        // PERMET DE RELANCER LA MUSIQUE / LE SON QUAND ILS SONT FINIT
         public static void RelanceMusique(object? sender, EventArgs e)
         {
             musiqueFond.Position = TimeSpan.Zero;
@@ -381,6 +425,7 @@ namespace The_Diamond_Excavator
             musiqueSon.Position = TimeSpan.Zero;
             musiqueSon.Play();
         }
+          // PERMET DE MODIFIER LE VOLUME DE LA MUSIQUE / SON
         public static void VolumeMusique(double volumeMusique)
         {
             if (musiqueFond != null)

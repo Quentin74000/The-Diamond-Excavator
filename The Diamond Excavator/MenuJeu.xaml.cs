@@ -1,45 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
 
 namespace The_Diamond_Excavator
 {
-
-    /// <summary>
-    /// Logique d'interaction pour Menu_Jeux.xaml
-    /// </summary>
     public partial class MenuJeu : Window
     {
-        Options fenetreOptions = new Options();
+        private Options fenetreOptions;
 
         public MenuJeu()
         {
             InitializeComponent();
-            
+            fenetreOptions = new Options();
+            fenetreOptions.Closing += FenetreOptions_Closing; // Ajouter un événement pour gérer la fermeture de la fenêtre
         }
+
+        private void FenetreOptions_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true; // Annule la fermeture de la fenêtre
+            fenetreOptions.Hide(); // Cache la fenêtre au lieu de la fermer
+        }
+
         private void butJouer_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }
+
         private void butQuitter_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
         private void butOptions_Click(object sender, RoutedEventArgs e)
         {
-            fenetreOptions.ShowDialog();
+            fenetreOptions.Show();
         }
     }
 }
