@@ -37,11 +37,8 @@ namespace The_Diamond_Excavator
 
         public MainWindow()
         {
-
             fenetreMenu.ShowDialog();
-            
             InitializeComponent();
-
             InitialisationImages();
             InitialisationMinuterie();
             CreationBombes();
@@ -337,6 +334,5 @@ namespace The_Diamond_Excavator
                 musiqueSon.Volume = VolumeSon / 100;
             }
         }
-
     }
 }
