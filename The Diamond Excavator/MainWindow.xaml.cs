@@ -17,7 +17,7 @@ namespace The_Diamond_Excavator
     {
         public static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
 
-        private static bool gauche, droite, creuse, saute, pause;
+        private static bool gauche, droite, creuse, saute, pause, triche;
         private static int vitesseJoueur = 6;
         private static int gravite = 15;
         private static int saut = 100;
@@ -54,9 +54,9 @@ namespace The_Diamond_Excavator
             InitializeComponent();
             InitialisationImages();
             InitialisationMinuterie();
-            CreationBlocs();
             CreationDiamants();
             CreationBombes();
+            CreationBlocs();
         }
 
         private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
@@ -77,6 +77,10 @@ namespace The_Diamond_Excavator
             {
                 pause = true;
             }
+            if (Key.P == e.Key)
+            {
+                triche = true;
+            }
         }
 
         private void joueur_ToucheRelachee(object sender, KeyEventArgs e)
@@ -92,6 +96,10 @@ namespace The_Diamond_Excavator
             if (Key.Up == e.Key)
             {
                 saute = false;
+            }
+            if (Key.P == e.Key)
+            {
+                triche = false;
             }
         }
 
@@ -157,8 +165,10 @@ namespace The_Diamond_Excavator
         {
             Random random = new Random();
             int decalage = 64, nbBombe = 0;
+
             do
             {
+                // Génération aléatoire de la position
                 int ligne = random.Next(1, 10), colonne = random.Next(1, 18);
                 Rectangle nouvelleBombe = new Rectangle
                 {
@@ -168,28 +178,40 @@ namespace The_Diamond_Excavator
                     Stroke = bombe.Stroke,
                     Fill = bombe.Fill,
                 };
+
                 Canvas.SetLeft(nouvelleBombe, Canvas.GetLeft(bombe) + colonne * decalage);
                 Canvas.SetTop(nouvelleBombe, Canvas.GetTop(bombe) + ligne * decalage);
-                bool dejaExistant = false;
+
+                bool bombeDejaExistante = false;
+                bool positionSurDiamant = false;
+
                 foreach (Rectangle bombeExistante in bombes)
                 {
                     if (Canvas.GetLeft(bombeExistante) == Canvas.GetLeft(nouvelleBombe) &&
                         Canvas.GetTop(bombeExistante) == Canvas.GetTop(nouvelleBombe))
                     {
-                        dejaExistant = true;
+                        bombeDejaExistante = true;
                         break;
                     }
                 }
-                if (!dejaExistant)
+                foreach (Rectangle diamantExistant in diamants)
+                {
+                    if (Canvas.GetLeft(diamantExistant) == Canvas.GetLeft(nouvelleBombe) &&
+                        Canvas.GetTop(diamantExistant) == Canvas.GetTop(nouvelleBombe))
+                    {
+                        positionSurDiamant = true;
+                        break;
+                    }
+                }
+
+                // Ajout de la bombe si la position est valide
+                if (!bombeDejaExistante && !positionSurDiamant)
                 {
                     zoneJeu.Children.Add(nouvelleBombe);
-                    diamants.Add(nouvelleBombe);
+                    bombes.Add(nouvelleBombe);
                     nbBombe += 1;
                 }
-                else
-                {
-                    continue;
-                }
+
             } while (nbBombe < 10);
         }
         private void CreationDiamants()
@@ -213,8 +235,7 @@ namespace The_Diamond_Excavator
                 bool dejaExistant = false;
                 foreach (Rectangle diamantExistant in diamants)
                 {
-                    if (Canvas.GetLeft(diamantExistant) == Canvas.GetLeft(nouveauDiamant) &&
-                        Canvas.GetTop(diamantExistant) == Canvas.GetTop(nouveauDiamant))
+                    if (Canvas.GetLeft(diamantExistant) == Canvas.GetLeft(nouveauDiamant) && Canvas.GetTop(diamantExistant) == Canvas.GetTop(nouveauDiamant))
                     {
                         dejaExistant = true;
                         break;
@@ -225,7 +246,7 @@ namespace The_Diamond_Excavator
                 {
                     zoneJeu.Children.Add(nouveauDiamant);
                     diamants.Add(nouveauDiamant);
-                    nbDiamants+=1;
+                    nbDiamants += 1;
                 }
                 else
                 {
@@ -263,7 +284,6 @@ namespace The_Diamond_Excavator
 
                 if (joueurCollision.IntersectsWith(blocCollision))
                 {
-                    testCollision.Content = "Collision avec un bloc";
                     gravite = 0;
                     collisionDetectee = true;
                     Canvas.SetTop(joueur, Canvas.GetTop(nouveauBloc) - joueur.ActualHeight);
@@ -272,28 +292,24 @@ namespace The_Diamond_Excavator
             }
             if (joueurCollision.IntersectsWith(solGaucheCollision))
             {
-                testCollision.Content = "Collision avec le sol gauche";
                 collisionDetectee = true;
                 gravite = 0;
                 Canvas.SetTop(joueur, Canvas.GetTop(solGauche) - joueur.ActualHeight);
             }
             else if (joueurCollision.IntersectsWith(solDroitCollision))
             {
-                testCollision.Content = "Collision avec le sol droit";
                 collisionDetectee = true;
                 gravite = 0;
                 Canvas.SetTop(joueur, Canvas.GetTop(solDroit) - joueur.ActualHeight);
             }
             else if (joueurCollision.IntersectsWith(solBasCollision))
             {
-                testCollision.Content = "Collision avec le sol bas";
                 collisionDetectee = true;
                 gravite = 0;
                 Canvas.SetTop(joueur, Canvas.GetTop(solBas) - joueur.ActualHeight);
             }
             if (!collisionDetectee)
             {
-                testCollision.Content = "Pas de collision";
                 gravite = 15;
                 Canvas.SetTop(joueur, Canvas.GetTop(joueur) + gravite);
             }
@@ -302,7 +318,7 @@ namespace The_Diamond_Excavator
         private void Chronometre(object? sender, EventArgs e)
         {
             chrono++;
-            lab_chronometre.Content = chrono;
+            lab_chronometre.Content = "Temps : " + chrono;
         }
 
         private void Jeu(object? sender, EventArgs e)
@@ -360,6 +376,20 @@ namespace The_Diamond_Excavator
                     chronometre.Stop();
                 }
                 fenetrePause.ShowDialog();
+            }
+            if (triche)
+            {
+                foreach (Rectangle nouveauBloc in blocs)
+                {
+                    nouveauBloc.Opacity = 0;
+                }
+            }
+            else if (!triche)
+            {
+                foreach (Rectangle nouveauBloc in blocs)
+                {
+                    nouveauBloc.Opacity = 100;
+                }
             }
             if (fenetrePause.DialogResult == true)
             {

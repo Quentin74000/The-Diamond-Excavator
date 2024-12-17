@@ -52,11 +52,6 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label
-                x:Name="testCollision"
-                Canvas.Left="90"
-                Canvas.Top="47"
-                Content="Label" />
             <Rectangle
                 x:Name="solGauche"
                 Canvas.Left="0"
@@ -126,9 +121,9 @@
                 VerticalAlignment="Top" />
             <Label
                 x:Name="lab_chronometre"
-                Canvas.Left="1872"
+                Canvas.Left="1289"
                 Canvas.Top="10"
-                Content="0" />
+                Content="Temps : 0" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </Canvas>
     </Grid>
 </Window>
