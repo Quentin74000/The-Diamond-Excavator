@@ -20,6 +20,7 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class Perdu : Window
     {
+        MediaPlayer sonDefaite;
         public Perdu()
         {
             InitializeComponent();
@@ -29,5 +30,11 @@ namespace The_Diamond_Excavator
         {
             Application.Current.Shutdown();
         }
+        public static void InitSon()
+        {
+            MediaPlayer sonDefaite = new MediaPlayer();
+            sonDefaite.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Defaite.mp3"));
+        }
+        
     }
 }

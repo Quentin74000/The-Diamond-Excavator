@@ -19,13 +19,21 @@ namespace The_Diamond_Excavator
     /// </summary>
     public partial class Gagne : Window
     {
+        MediaPlayer sonVictoire;
         public Gagne()
         {
             InitializeComponent();
+            InitSon();
         }
         private void Quitter_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+        public static void InitSon()
+        {
+
+            MediaPlayer sonVictoire = new MediaPlayer();
+            sonVictoire.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Victoire.mp3"));
         }
     }
 }

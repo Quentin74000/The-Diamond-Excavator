@@ -15,7 +15,7 @@ namespace The_Diamond_Excavator
 {
     public partial class MainWindow : Window
     {
-        public static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
+        public static MediaPlayer musiqueFond, musiqueSon, sonDiamant, sonBombe, sonDefaite, sonVictoire, sonBloc; // pour initialiser la musique et les sons
 
         private static bool gauche, droite, creuse, saute, pause, triche, gagne, perdu;
         private static int vitesseJoueur = 6;
@@ -116,9 +116,6 @@ namespace The_Diamond_Excavator
             {
                 pelleteuseGauche = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseGauche.png"));
                 pelleteuseDroite = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseDroite.png"));
-                pelleteuseCreuse1 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse1.png"));
-                pelleteuseCreuse2 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse2.png"));
-                pelleteuseCreuse3 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse3.png"));
             }
         }
 
@@ -206,23 +203,23 @@ namespace The_Diamond_Excavator
         {
             Random random = new Random();
             int decalage = 64;
-            List<Rectangle> bombesToAdd = new List<Rectangle>();
+            List<Rectangle> ajoutBombes = new List<Rectangle>();
 
             // Placement selon le niveau de difficulté
             if (NB_BOMBES == 15) // Niveau difficile
             {
                 // Configuration pour placement autour des diamants
                 List<Point> positionsAutourDiamant = new List<Point>
-        {
-            new Point(-1, -1), // Haut gauche
-            new Point(0, -1),  // Haut
-            new Point(1, -1),  // Haut droite
-            new Point(-1, 0),  // Gauche
-            new Point(1, 0),   // Droite
-            new Point(-1, 1),  // Bas gauche
-            new Point(0, 1),   // Bas
-            new Point(1, 1)    // Bas droite
-        };
+                {
+                    new Point(-1, -1), // Haut gauche
+                    new Point(0, -1),  // Haut
+                    new Point(1, -1),  // Haut droite
+                    new Point(-1, 0),  // Gauche
+                    new Point(1, 0),   // Droite
+                    new Point(-1, 1),  // Bas gauche
+                    new Point(0, 1),   // Bas
+                    new Point(1, 1)    // Bas droite
+                };
 
                 foreach (Rectangle diamant in diamants)
                 {
@@ -233,9 +230,9 @@ namespace The_Diamond_Excavator
                     int nbBombesAutour = random.Next(3, 5);
                     var positionsChoisies = positionsAutourDiamant.OrderBy(x => random.Next()).Take(nbBombesAutour).ToList();
 
-                    foreach (Point offset in positionsChoisies)
+                    foreach (Point position in positionsChoisies)
                     {
-                        PlacerBombe(bombesToAdd, diamantLigne + (int)offset.Y, diamantColonne + (int)offset.X, decalage);
+                        PlacerBombe(ajoutBombes, diamantLigne + (int)position.Y, diamantColonne + (int)position.X, decalage);
                     }
                 }
             }
@@ -251,40 +248,40 @@ namespace The_Diamond_Excavator
                     for (int i = 0; i < nbBombesProches; i++)
                     {
                         // Génère une position proche du diamant (1-2 cases de distance)
-                        int offsetX = random.Next(-2, 3);
-                        int offsetY = random.Next(-2, 3);
+                        int positionX = random.Next(-2, 3);
+                        int positionY = random.Next(-2, 3);
 
                         // Évite de placer la bombe directement sur le diamant
-                        if (offsetX == 0 && offsetY == 0) continue;
+                        if (positionX == 0 && positionY == 0) continue;
 
-                        PlacerBombe(bombesToAdd, diamantLigne + offsetY, diamantColonne + offsetX, decalage);
+                        PlacerBombe(ajoutBombes, diamantLigne + positionY, diamantColonne + positionX, decalage);
                     }
                 }
 
                 // Complète avec des bombes aléatoires si nécessaire
-                while (bombesToAdd.Count < NB_BOMBES)
+                while (ajoutBombes.Count < NB_BOMBES)
                 {
-                    PlacerBombe(bombesToAdd, random.Next(1, 10), random.Next(1, 18), decalage);
+                    PlacerBombe(ajoutBombes, random.Next(1, 10), random.Next(1, 18), decalage);
                 }
             }
             else // Niveau facile
             {
                 // Place les bombes loin des diamants
-                while (bombesToAdd.Count < NB_BOMBES)
+                while (ajoutBombes.Count < NB_BOMBES)
                 {
                     int ligne = random.Next(1, 10);
                     int colonne = random.Next(1, 18);
 
                     // Vérifie si la position est suffisamment éloignée des diamants
                     bool tropPresDiamant = false;
-                    double posX = Canvas.GetLeft(bombe) + colonne * decalage;
-                    double posY = Canvas.GetTop(bombe) + ligne * decalage;
+                    double positionX = Canvas.GetLeft(bombe) + colonne * decalage;
+                    double positionY = Canvas.GetTop(bombe) + ligne * decalage;
 
                     foreach (Rectangle diamant in diamants)
                     {
                         double distance = Math.Sqrt(
-                            Math.Pow(posX - Canvas.GetLeft(diamant), 2) +
-                            Math.Pow(posY - Canvas.GetTop(diamant), 2)
+                            Math.Pow(positionX - Canvas.GetLeft(diamant), 2) +
+                            Math.Pow(positionY - Canvas.GetTop(diamant), 2)
                         );
 
                         if (distance < 150) // Distance minimale pour le niveau facile
@@ -296,13 +293,13 @@ namespace The_Diamond_Excavator
 
                     if (!tropPresDiamant)
                     {
-                        PlacerBombe(bombesToAdd, ligne, colonne, decalage);
+                        PlacerBombe(ajoutBombes, ligne, colonne, decalage);
                     }
                 }
             }
 
             // Ajoute toutes les bombes créées à la zone de jeu
-            foreach (Rectangle nouvelleBombe in bombesToAdd)
+            foreach (Rectangle nouvelleBombe in ajoutBombes)
             {
                 zoneJeu.Children.Add(nouvelleBombe);
                 bombes.Add(nouvelleBombe);
@@ -310,7 +307,7 @@ namespace The_Diamond_Excavator
         }
 
         // Méthode helper pour placer une bombe
-        private void PlacerBombe(List<Rectangle> bombesToAdd, int ligne, int colonne, int decalage)
+        private void PlacerBombe(List<Rectangle> ajoutBombes, int ligne, int colonne, int decalage)
         {
             // Vérifie si la position est dans les limites
             if (ligne < 1 || ligne >= 10 || colonne < 1 || colonne >= 18)
@@ -320,7 +317,7 @@ namespace The_Diamond_Excavator
             double bombeY = Canvas.GetTop(bombe) + ligne * decalage;
 
             // Vérifie si l'emplacement est déjà occupé
-            foreach (Rectangle existant in bombesToAdd)
+            foreach (Rectangle existant in ajoutBombes)
             {
                 if (Canvas.GetLeft(existant) == bombeX && Canvas.GetTop(existant) == bombeY)
                     return;
@@ -344,7 +341,7 @@ namespace The_Diamond_Excavator
 
             Canvas.SetLeft(nouvelleBombe, bombeX);
             Canvas.SetTop(nouvelleBombe, bombeY);
-            bombesToAdd.Add(nouvelleBombe);
+            ajoutBombes.Add(nouvelleBombe);
         }
         //private void CreationBombes()
         //{
@@ -498,6 +495,7 @@ namespace The_Diamond_Excavator
             // Si une bombe est trouvée sous le bloc
             if (bombeAssociee != null)
             {
+                //sonBombe.Play();
                 // Retire la dernière vie a être apparue
                 Rectangle viePerdue = vies[^1];
                 zoneJeu.Children.Remove(viePerdue);
@@ -511,13 +509,13 @@ namespace The_Diamond_Excavator
 
             if (diamantAssociee != null)
             {
-
+                //sonDiamant.Play();
                 // Retire le diamant de la liste pour qu'il puisse rester affiché sans compter
                 diamants.Remove(diamantAssociee);
                 nbDiamant += 1;
                 
             }
-
+            //sonBloc.Play();
             // Supprime le bloc cliqué du canvas et de la liste
             blocs.Remove(blocClique);
             zoneJeu.Children.Remove(blocClique);
@@ -682,6 +680,8 @@ namespace The_Diamond_Excavator
                 {
                     nouveauBloc.Opacity = 0;
                 }
+                musiqueFond.Stop();
+                musiqueSon.Stop();
                 minuterie.Stop();
                 chronometre.Stop();
                 Gagne fenetreGagne = new Gagne();
@@ -693,6 +693,8 @@ namespace The_Diamond_Excavator
                 {
                     nouveauBloc.Opacity = 0;
                 }
+                musiqueFond.Stop();
+                musiqueSon.Stop();
                 minuterie.Stop();
                 chronometre.Stop();
                 Perdu fenetrePerdu = new Perdu();
@@ -745,6 +747,18 @@ namespace The_Diamond_Excavator
             musiqueSon.MediaEnded += RelanceSon;
             musiqueSon.Play();
             musiqueSon.Volume = 0.3;
+
+            MediaPlayer sonDiamant = new MediaPlayer();
+            sonDiamant.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Diamant.mp3"));
+            sonDiamant.Volume = 1;
+
+            MediaPlayer sonBombe = new MediaPlayer();
+            sonBombe.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Bombe.mp3"));
+            sonBombe.Volume = 1;
+
+            MediaPlayer sonBloc = new MediaPlayer();
+            sonBloc.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Bloc.mp3"));
+            sonBloc.Volume = 1;
         }
         // PERMET DE RELANCER LA MUSIQUE / LE SON QUAND ILS SONT FINIT
         public static void RelanceMusique(object? sender, EventArgs e)

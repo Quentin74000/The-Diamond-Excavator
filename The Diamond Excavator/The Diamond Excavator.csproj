@@ -31,10 +31,16 @@
     <None Remove="img\sol.png" />
     <None Remove="img\Terre.png" />
     <None Remove="img\Victoire.png" />
+    <None Remove="son\Bloc.mp3" />
+    <None Remove="son\Bombe.wav" />
     <None Remove="son\bruitChantier.wav" />
-    <None Remove="son\explosionGrenade.wav" />
+    <None Remove="son\Defaite.mp3" />
+    <None Remove="son\Diamant.mp3" />
     <None Remove="son\explosionNuke.wav" />
+    <None Remove="son\MusiqueFond.mp3" />
     <None Remove="son\MusiqueFond.wav" />
+    <None Remove="son\musiqueSon.mp3" />
+    <None Remove="son\Victoire.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +50,12 @@
     <Content Include="img\Diamant.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="son\Bloc.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="son\MusiqueFond.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -101,21 +113,24 @@
     <Resource Include="img\Victoire.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="son\explosionGrenade.wav">
+    <Resource Include="son\Bombe.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="son\Defaite.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="son\Diamant.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="son\explosionNuke.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="son\MusiqueFond.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="son\musiqueSon.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Resource Include="son\musiqueSon.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="son\Victoire.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
