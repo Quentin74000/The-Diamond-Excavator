@@ -205,62 +205,206 @@ namespace The_Diamond_Excavator
         private void CreationBombes()
         {
             Random random = new Random();
-            int decalage = 64, nbBombe = 0;
+            int decalage = 64;
+            List<Rectangle> bombesToAdd = new List<Rectangle>();
 
-            do
+            // Placement selon le niveau de difficulté
+            if (NB_BOMBES == 15) // Niveau difficile
             {
-                // Génération aléatoire de la position
-                int ligne = random.Next(1, 10), colonne = random.Next(1, 18);
-                Rectangle nouvelleBombe = new Rectangle
+                // Configuration pour placement autour des diamants
+                List<Point> positionsAutourDiamant = new List<Point>
+        {
+            new Point(-1, -1), // Haut gauche
+            new Point(0, -1),  // Haut
+            new Point(1, -1),  // Haut droite
+            new Point(-1, 0),  // Gauche
+            new Point(1, 0),   // Droite
+            new Point(-1, 1),  // Bas gauche
+            new Point(0, 1),   // Bas
+            new Point(1, 1)    // Bas droite
+        };
+
+                foreach (Rectangle diamant in diamants)
                 {
-                    Tag = "nouvelleBombe",
-                    Height = bombe.Height,
-                    Width = bombe.Width,
-                    Stroke = bombe.Stroke,
-                    Fill = bombe.Fill,
-                };
+                    int diamantColonne = (int)((Canvas.GetLeft(diamant) - Canvas.GetLeft(bombe)) / decalage);
+                    int diamantLigne = (int)((Canvas.GetTop(diamant) - Canvas.GetTop(bombe)) / decalage);
 
-                // Premier placement de la bombe
-                Canvas.SetLeft(nouvelleBombe, Canvas.GetLeft(bombe) + colonne * decalage);
-                Canvas.SetTop(nouvelleBombe, Canvas.GetTop(bombe) + ligne * decalage);
+                    // Place 3-4 bombes autour de chaque diamant
+                    int nbBombesAutour = random.Next(3, 5);
+                    var positionsChoisies = positionsAutourDiamant.OrderBy(x => random.Next()).Take(nbBombesAutour).ToList();
 
-                // Initialisation des tests pour le chevauchement entre bombes et diamants
-                bool bombeDejaExistante = false;
-                bool positionSurDiamant = false;
-
-                // Test pour savoir si une bombe est déjà présent dans l'emplacement
-                foreach (Rectangle bombeExistante in bombes)
-                {
-                    if (Canvas.GetLeft(bombeExistante) == Canvas.GetLeft(nouvelleBombe) &&
-                        Canvas.GetTop(bombeExistante) == Canvas.GetTop(nouvelleBombe))
+                    foreach (Point offset in positionsChoisies)
                     {
-                        bombeDejaExistante = true;
-                        break;
+                        PlacerBombe(bombesToAdd, diamantLigne + (int)offset.Y, diamantColonne + (int)offset.X, decalage);
+                    }
+                }
+            }
+            else if (NB_BOMBES == 10) // Niveau moyen
+            {
+                foreach (Rectangle diamant in diamants)
+                {
+                    int diamantColonne = (int)((Canvas.GetLeft(diamant) - Canvas.GetLeft(bombe)) / decalage);
+                    int diamantLigne = (int)((Canvas.GetTop(diamant) - Canvas.GetTop(bombe)) / decalage);
+
+                    // Pour chaque diamant, place 1-2 bombes à proximité
+                    int nbBombesProches = random.Next(1, 3);
+                    for (int i = 0; i < nbBombesProches; i++)
+                    {
+                        // Génère une position proche du diamant (1-2 cases de distance)
+                        int offsetX = random.Next(-2, 3);
+                        int offsetY = random.Next(-2, 3);
+
+                        // Évite de placer la bombe directement sur le diamant
+                        if (offsetX == 0 && offsetY == 0) continue;
+
+                        PlacerBombe(bombesToAdd, diamantLigne + offsetY, diamantColonne + offsetX, decalage);
                     }
                 }
 
-                // Test pour savoir si un diamant est déjà présent dans l'emplacement
-                foreach (Rectangle diamantExistant in diamants)
+                // Complète avec des bombes aléatoires si nécessaire
+                while (bombesToAdd.Count < NB_BOMBES)
                 {
-                    if (Canvas.GetLeft(diamantExistant) == Canvas.GetLeft(nouvelleBombe) &&
-                        Canvas.GetTop(diamantExistant) == Canvas.GetTop(nouvelleBombe))
+                    PlacerBombe(bombesToAdd, random.Next(1, 10), random.Next(1, 18), decalage);
+                }
+            }
+            else // Niveau facile
+            {
+                // Place les bombes loin des diamants
+                while (bombesToAdd.Count < NB_BOMBES)
+                {
+                    int ligne = random.Next(1, 10);
+                    int colonne = random.Next(1, 18);
+
+                    // Vérifie si la position est suffisamment éloignée des diamants
+                    bool tropPresDiamant = false;
+                    double posX = Canvas.GetLeft(bombe) + colonne * decalage;
+                    double posY = Canvas.GetTop(bombe) + ligne * decalage;
+
+                    foreach (Rectangle diamant in diamants)
                     {
-                        positionSurDiamant = true;
-                        break;
+                        double distance = Math.Sqrt(
+                            Math.Pow(posX - Canvas.GetLeft(diamant), 2) +
+                            Math.Pow(posY - Canvas.GetTop(diamant), 2)
+                        );
+
+                        if (distance < 150) // Distance minimale pour le niveau facile
+                        {
+                            tropPresDiamant = true;
+                            break;
+                        }
+                    }
+
+                    if (!tropPresDiamant)
+                    {
+                        PlacerBombe(bombesToAdd, ligne, colonne, decalage);
                     }
                 }
+            }
 
-                // Ajout de la bombe si la position est valide
-                if (!bombeDejaExistante && !positionSurDiamant)
-                {
-                    zoneJeu.Children.Add(nouvelleBombe);
-                    bombes.Add(nouvelleBombe);
-                    nbBombe += 1;
-                }
-
-            } while (nbBombe < NB_BOMBES);
+            // Ajoute toutes les bombes créées à la zone de jeu
+            foreach (Rectangle nouvelleBombe in bombesToAdd)
+            {
+                zoneJeu.Children.Add(nouvelleBombe);
+                bombes.Add(nouvelleBombe);
+            }
         }
-        
+
+        // Méthode helper pour placer une bombe
+        private void PlacerBombe(List<Rectangle> bombesToAdd, int ligne, int colonne, int decalage)
+        {
+            // Vérifie si la position est dans les limites
+            if (ligne < 1 || ligne >= 10 || colonne < 1 || colonne >= 18)
+                return;
+
+            double bombeX = Canvas.GetLeft(bombe) + colonne * decalage;
+            double bombeY = Canvas.GetTop(bombe) + ligne * decalage;
+
+            // Vérifie si l'emplacement est déjà occupé
+            foreach (Rectangle existant in bombesToAdd)
+            {
+                if (Canvas.GetLeft(existant) == bombeX && Canvas.GetTop(existant) == bombeY)
+                    return;
+            }
+
+            // Vérifie si un diamant est à cet emplacement
+            foreach (Rectangle diamant in diamants)
+            {
+                if (Canvas.GetLeft(diamant) == bombeX && Canvas.GetTop(diamant) == bombeY)
+                    return;
+            }
+
+            Rectangle nouvelleBombe = new Rectangle
+            {
+                Tag = "nouvelleBombe",
+                Height = bombe.Height,
+                Width = bombe.Width,
+                Stroke = bombe.Stroke,
+                Fill = bombe.Fill
+            };
+
+            Canvas.SetLeft(nouvelleBombe, bombeX);
+            Canvas.SetTop(nouvelleBombe, bombeY);
+            bombesToAdd.Add(nouvelleBombe);
+        }
+        //private void CreationBombes()
+        //{
+        //    Random random = new Random();
+        //    int decalage = 64, nbBombe = 0;
+
+        //    do
+        //    {
+        //        // Génération aléatoire de la position
+        //        int ligne = random.Next(1, 10), colonne = random.Next(1, 18);
+        //        Rectangle nouvelleBombe = new Rectangle
+        //        {
+        //            Tag = "nouvelleBombe",
+        //            Height = bombe.Height,
+        //            Width = bombe.Width,
+        //            Stroke = bombe.Stroke,
+        //            Fill = bombe.Fill,
+        //        };
+
+        //        // Premier placement de la bombe
+        //        Canvas.SetLeft(nouvelleBombe, Canvas.GetLeft(bombe) + colonne * decalage);
+        //        Canvas.SetTop(nouvelleBombe, Canvas.GetTop(bombe) + ligne * decalage);
+
+        //        // Initialisation des tests pour le chevauchement entre bombes et diamants
+        //        bool bombeDejaExistante = false;
+        //        bool positionSurDiamant = false;
+
+        //        // Test pour savoir si une bombe est déjà présent dans l'emplacement
+        //        foreach (Rectangle bombeExistante in bombes)
+        //        {
+        //            if (Canvas.GetLeft(bombeExistante) == Canvas.GetLeft(nouvelleBombe) &&
+        //                Canvas.GetTop(bombeExistante) == Canvas.GetTop(nouvelleBombe))
+        //            {
+        //                bombeDejaExistante = true;
+        //                break;
+        //            }
+        //        }
+
+        //        // Test pour savoir si un diamant est déjà présent dans l'emplacement
+        //        foreach (Rectangle diamantExistant in diamants)
+        //        {
+        //            if (Canvas.GetLeft(diamantExistant) == Canvas.GetLeft(nouvelleBombe) &&
+        //                Canvas.GetTop(diamantExistant) == Canvas.GetTop(nouvelleBombe))
+        //            {
+        //                positionSurDiamant = true;
+        //                break;
+        //            }
+        //        }
+
+        //        // Ajout de la bombe si la position est valide
+        //        if (!bombeDejaExistante && !positionSurDiamant)
+        //        {
+        //            zoneJeu.Children.Add(nouvelleBombe);
+        //            bombes.Add(nouvelleBombe);
+        //            nbBombe += 1;
+        //        }
+
+        //    } while (nbBombe < NB_BOMBES);
+        //}
+
         private void CreationDiamants()
         {
             Random random = new Random();
