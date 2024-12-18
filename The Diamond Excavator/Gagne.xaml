@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:The_Diamond_Excavator"
         mc:Ignorable="d"
-        Title="Gagne" Height="500" Width="450" WindowStartupLocation="CenterScreen">
+        Title="Gagne" Height="500" Width="450" WindowStartupLocation="CenterScreen" Icon="/img/Diamant.png" ResizeMode="CanMinimize">
     <Window.Background>
         <ImageBrush ImageSource="/img/Victoire.png"/>
     </Window.Background>
