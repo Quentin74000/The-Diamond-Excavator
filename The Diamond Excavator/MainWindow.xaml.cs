@@ -63,7 +63,7 @@ namespace The_Diamond_Excavator
             CreationBlocs();
         }
         // Contrôles du joueur lorsque la touche est enfoncée
-        private void joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
+        private void Joueur_ToucheEnfoncee(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -86,7 +86,7 @@ namespace The_Diamond_Excavator
         }
 
         // Contrôles du joueur lorsque la touche est relâchée
-        private void joueur_ToucheRelachee(object sender, KeyEventArgs e)
+        private void Joueur_ToucheRelachee(object sender, KeyEventArgs e)
         {
 
             if (Key.Left == e.Key)
