@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="img\Bombe.png" />
+    <None Remove="img\Ciel.png" />
     <None Remove="img\Coeur.png" />
     <None Remove="img\Creuser.gif" />
     <None Remove="img\Defaite.png" />
@@ -46,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\Ciel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\Coeur.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
