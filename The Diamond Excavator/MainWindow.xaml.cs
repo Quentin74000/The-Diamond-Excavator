@@ -15,7 +15,7 @@ namespace The_Diamond_Excavator
 {
     public partial class MainWindow : Window
     {
-        public static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
+        public static MediaPlayer musiqueFond, musiqueSon, sonDiamant, sonBombe, sonDefaite, sonVictoire, sonBloc; // pour initialiser la musique et les sons
 
         private static bool gauche, droite, creuse, saute, pause, triche, gagne, perdu;
         private static int vitesseJoueur = 6;
@@ -115,9 +115,6 @@ namespace The_Diamond_Excavator
             {
                 pelleteuseGauche = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseGauche.png"));
                 pelleteuseDroite = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseDroite.png"));
-                pelleteuseCreuse1 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse1.png"));
-                pelleteuseCreuse2 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse2.png"));
-                pelleteuseCreuse3 = new BitmapImage(new Uri($"pack://application:,,,/img/PelleteuseCreuse3.png"));
             }
         }
 
@@ -512,6 +509,7 @@ namespace The_Diamond_Excavator
             // Si une bombe est trouvée sous le bloc
             if (bombeAssociee != null)
             {
+                //sonBombe.Play();
                 // Retire la dernière vie a être apparue
                 Rectangle viePerdue = vies[^1];
                 zoneJeu.Children.Remove(viePerdue);
@@ -525,13 +523,13 @@ namespace The_Diamond_Excavator
 
             if (diamantAssociee != null)
             {
-
+                //sonDiamant.Play();
                 // Retire le diamant de la liste pour qu'il puisse rester affiché sans compter
                 diamants.Remove(diamantAssociee);
                 nbDiamant += 1;
                 
             }
-
+            //sonBloc.Play();
             // Supprime le bloc cliqué du canvas et de la liste
             blocs.Remove(blocClique);
             zoneJeu.Children.Remove(blocClique);
@@ -696,6 +694,8 @@ namespace The_Diamond_Excavator
                 {
                     nouveauBloc.Opacity = 0;
                 }
+                musiqueFond.Stop();
+                musiqueSon.Stop();
                 minuterie.Stop();
                 chronometre.Stop();
                 Gagne fenetreGagne = new Gagne();
@@ -707,6 +707,8 @@ namespace The_Diamond_Excavator
                 {
                     nouveauBloc.Opacity = 0;
                 }
+                musiqueFond.Stop();
+                musiqueSon.Stop();
                 minuterie.Stop();
                 chronometre.Stop();
                 Perdu fenetrePerdu = new Perdu();
@@ -759,6 +761,18 @@ namespace The_Diamond_Excavator
             musiqueSon.MediaEnded += RelanceSon;
             musiqueSon.Play();
             musiqueSon.Volume = 0.3;
+
+            MediaPlayer sonDiamant = new MediaPlayer();
+            sonDiamant.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Diamant.mp3"));
+            sonDiamant.Volume = 1;
+
+            MediaPlayer sonBombe = new MediaPlayer();
+            sonBombe.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Bombe.mp3"));
+            sonBombe.Volume = 1;
+
+            MediaPlayer sonBloc = new MediaPlayer();
+            sonBloc.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/Bloc.mp3"));
+            sonBloc.Volume = 1;
         }
         // PERMET DE RELANCER LA MUSIQUE / LE SON QUAND ILS SONT FINIT
         public static void RelanceMusique(object? sender, EventArgs e)
