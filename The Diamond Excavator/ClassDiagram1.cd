@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="The_Diamond_Excavator.Gagne">
+    <Position X="10.5" Y="0.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Gagne.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="The_Diamond_Excavator.MainWindow">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>DAII2pQCzIgIEBIAAEioJgyAAYALgJASABKkABAPcRA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="The_Diamond_Excavator.MenuJeu">
+    <Position X="3.75" Y="6" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAQAAAAAAEAAAAAAAAAAAAAARAAAAAA=</HashCode>
+      <FileName>MenuJeu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="The_Diamond_Excavator.MenuPause">
+    <Position X="3.75" Y="3.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAQAAAAAAAAgABAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>MenuPause.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="The_Diamond_Excavator.Niveaux">
+    <Position X="9" Y="3.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAIAIAAIAAAAAAAAAAIAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Niveaux.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="The_Diamond_Excavator.Options">
+    <Position X="3.75" Y="0.5" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAQAAIAAAAAAACAAAAAAACAAAABA=</HashCode>
+      <FileName>Options.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="The_Diamond_Excavator.Perdu">
+    <Position X="9.25" Y="6.25" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAACAAAAAAA=</HashCode>
+      <FileName>Perdu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

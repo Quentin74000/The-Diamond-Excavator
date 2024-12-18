@@ -1,13 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -47,7 +42,7 @@ namespace The_Diamond_Excavator
 
         // DÉCLARATION DES DIFFÉRENTES VARIABLES (BOMBES,DIAMANTS,MINES)
         public static int NB_BOMBES = 0;
-        public static int NB_MINES = 0;
+        public static int DISTANCE_BOMBE_DIAMANT = 0;
         public static int NB_DIAMANTS = 0;
 
 
@@ -198,110 +193,6 @@ namespace The_Diamond_Excavator
                 totalDecalageVertical += decalageBloc;
             }
         }
-        
-        //private void CreationBombes()
-        //{
-        //    Random random = new Random();
-        //    int decalage = 64, nbBombe = 0;
-
-        //    do
-        //    {
-        //        // Génération aléatoire de la position
-        //        int ligne = random.Next(1, 10), colonne = random.Next(1, 18);
-        //        Rectangle nouvelleBombe = new Rectangle
-        //        {
-        //            Tag = "nouvelleBombe",
-        //            Height = bombe.Height,
-        //            Width = bombe.Width,
-        //            Stroke = bombe.Stroke,
-        //            Fill = bombe.Fill,
-        //        };
-
-        //        // Premier placement de la bombe
-        //        double bombeX = Canvas.GetLeft(bombe) + colonne * decalage;
-        //        double bombeY = Canvas.GetTop(bombe) + ligne * decalage;
-        //        Canvas.SetLeft(nouvelleBombe, bombeX);
-        //        Canvas.SetTop(nouvelleBombe, bombeY);
-
-        //        // Initialisation des tests
-        //        bool bombeDejaExistante = false;
-        //        bool positionSurDiamant = false;
-        //        bool positionValide = true;
-
-        //        // Test pour savoir si une bombe est déjà présente
-        //        foreach (Rectangle bombeExistante in bombes)
-        //        {
-        //            if (Canvas.GetLeft(bombeExistante) == bombeX && Canvas.GetTop(bombeExistante) == bombeY)
-        //            {
-        //                bombeDejaExistante = true;
-        //                break;
-        //            }
-        //        }
-
-        //        // Test pour les diamants selon le niveau de difficulté
-        //        foreach (Rectangle diamantExistant in diamants)
-        //        {
-        //            double diamantX = Canvas.GetLeft(diamantExistant);
-        //            double diamantY = Canvas.GetTop(diamantExistant);
-
-        //            // Vérifie si on est sur un diamant
-        //            if (diamantX == bombeX && diamantY == bombeY)
-        //            {
-        //                positionSurDiamant = true;
-        //                break;
-        //            }
-
-        //            // Calcul de la distance entre la bombe et le diamant
-        //            double distance = Math.Sqrt(
-        //                Math.Pow(bombeX - diamantX, 2) +
-        //                Math.Pow(bombeY - diamantY, 2)
-        //            );
-
-        //            // Vérification selon le niveau
-        //            if (NB_BOMBES == 15) // Niveau difficile
-        //            {
-        //                // On veut des bombes proches des diamants
-        //                // Si la bombe n'est pas dans un rayon de 100 pixels d'au moins un diamant
-        //                if (distance > 60 && !positionValide)
-        //                {
-        //                    positionValide = false;
-        //                }
-        //                // Si on trouve au moins un diamant proche, la position est valide
-        //                if (distance <= 60)
-        //                {
-        //                    positionValide = true;
-        //                }
-        //            }
-        //            else if (NB_BOMBES == 10) // Niveau moyen
-        //            {
-        //                // Distance moyenne des bombes
-        //                if (distance < 75)
-        //                {
-        //                    positionValide = false;
-        //                    break;
-        //                }
-        //            }
-        //            else // Niveau facile
-        //            {
-        //                // Bombes éloignées des diamants
-        //                if (distance < 150)
-        //                {
-        //                    positionValide = false;
-        //                    break;
-        //                }
-        //            }
-        //        }
-
-        //        // Ajout de la bombe si la position est valide
-        //        if (!bombeDejaExistante && !positionSurDiamant && positionValide)
-        //        {
-        //            zoneJeu.Children.Add(nouvelleBombe);
-        //            bombes.Add(nouvelleBombe);
-        //            nbBombe += 1;
-        //        }
-
-        //    } while (nbBombe < NB_BOMBES);
-        //}
         private void CreationBombes()
         {
             Random random = new Random();
@@ -353,12 +244,12 @@ namespace The_Diamond_Excavator
                     {
                         // On veut des bombes proches des diamants
                         // Si la bombe n'est pas dans un rayon de 100 pixels d'au moins un diamant
-                        if (distance > 60 && !positionValide)
+                        if (distance > DISTANCE_BOMBE_DIAMANT && !positionValide)
                         {
                             positionValide = false;
                         }
                         // Si on trouve au moins un diamant proche, la position est valide
-                        if (distance <= 60)
+                        if (distance <= DISTANCE_BOMBE_DIAMANT)
                         {
                             positionValide = true;
                         }
@@ -366,7 +257,7 @@ namespace The_Diamond_Excavator
                     else if (NB_BOMBES == 10) // Niveau moyen
                     {
                         // Distance moyenne des bombes
-                        if (distance < 75)
+                        if (distance < DISTANCE_BOMBE_DIAMANT)
                         {
                             positionValide = false;
                             break;
@@ -375,7 +266,7 @@ namespace The_Diamond_Excavator
                     else // Niveau facile
                     {
                         // Bombes éloignées des diamants
-                        if (distance < 150)
+                        if (distance < DISTANCE_BOMBE_DIAMANT)
                         {
                             positionValide = false;
                             break;
@@ -722,7 +613,7 @@ namespace The_Diamond_Excavator
             {
                 Console.WriteLine("Niveau 1");
                 NB_BOMBES = 5;
-                NB_MINES = 7;
+                DISTANCE_BOMBE_DIAMANT = 100;
                 NB_DIAMANTS = 6;
                 //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
             }
@@ -730,7 +621,7 @@ namespace The_Diamond_Excavator
             {
                 Console.WriteLine("Niveau 2");
                 NB_BOMBES = 10;
-                NB_MINES = 7;
+                DISTANCE_BOMBE_DIAMANT = 75;
                 NB_DIAMANTS = 6;
                 //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
             }
@@ -738,7 +629,7 @@ namespace The_Diamond_Excavator
             {
                 Console.WriteLine("Niveau 3");
                 NB_BOMBES = 15;
-                NB_MINES = 7;
+                DISTANCE_BOMBE_DIAMANT = 60;
                 NB_DIAMANTS = 6;
                 //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
             }

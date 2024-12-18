@@ -29,7 +29,6 @@ namespace The_Diamond_Excavator
             //valeuSliderSon = V;
             //Chronometre();
         }
-
         //private void Chronometre(object sender, RoutedEventArgs e)
         //{
         //    chronmetre = new DispatcherTimer();
@@ -53,7 +52,6 @@ namespace The_Diamond_Excavator
                 this.Close();
             }
         }
-
         private void ButOptions_Click(object sender, RoutedEventArgs e)
         {
             Options fenetreOptions = new Options();
