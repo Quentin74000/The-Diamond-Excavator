@@ -10,6 +10,9 @@
     Height="450"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.Background>
+        <ImageBrush ImageSource="/img/fondMenuNiveaux.png"/>
+    </Window.Background>
     <Grid>
         <Button
             x:Name="ButFacile"
@@ -21,7 +24,7 @@
             Click="ButFacile_Click"
             Content="FACILE"
             FontSize="16"
-            FontWeight="Bold" />
+            FontWeight="Bold" Background="#FF44FB7B" />
         <Button
             x:Name="ButMoyen"
             Width="244"
@@ -32,7 +35,7 @@
             Click="ButMoyen_Click"
             Content="MOYEN"
             FontSize="16"
-            FontWeight="Bold" />
+            FontWeight="Bold" Background="#FFF16028" />
         <Button
             x:Name="ButDifficile_"
             Width="244"
@@ -44,7 +47,7 @@
             Content="DIFFICILE"
             FontSize="16"
             FontWeight="Bold"
-            RenderTransformOrigin="-0.087,0.48" />
+            RenderTransformOrigin="-0.087,0.48" Background="Red" />
 
     </Grid>
 </Window>

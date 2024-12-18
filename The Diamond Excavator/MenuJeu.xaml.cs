@@ -20,17 +20,17 @@ namespace The_Diamond_Excavator
             fenetreOptions.Hide(); // Cache la fenêtre au lieu de la fermer
         }
 
-        private void butJouer_Click(object sender, RoutedEventArgs e)
+        private void ButJouer_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }
 
-        private void butQuitter_Click(object sender, RoutedEventArgs e)
+        private void ButQuitter_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void butOptions_Click(object sender, RoutedEventArgs e)
+        private void ButOptions_Click(object sender, RoutedEventArgs e)
         {
             fenetreOptions.Show();
         }

@@ -18,6 +18,7 @@
     <None Remove="img\Diamant.png" />
     <None Remove="img\Dynamite.png" />
     <None Remove="img\FondMenuJeux.png" />
+    <None Remove="img\fondMenuNiveaux.png" />
     <None Remove="img\FondMenuPause.png" />
     <None Remove="img\Image de fond Menu.jpg" />
     <None Remove="img\Mines.png" />
@@ -63,6 +64,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\FondMenuJeux.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\fondMenuNiveaux.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\FondMenuPause.png">

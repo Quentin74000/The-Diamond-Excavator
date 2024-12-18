@@ -17,13 +17,13 @@
     <Grid x:Name="textBoxDiamant">
 
         <Button
-            x:Name="butJouer"
+            x:Name="ButJouer"
             Width="250"
             Height="55"
             Margin="0,146,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Click="butJouer_Click"
+            Click="ButJouer_Click"
             Content="JOUER"
             FontFamily="Britannic Bold"
             FontSize="20" />
@@ -39,25 +39,25 @@
             FontFamily="Britannic Bold"
             FontSize="22" />
         <Button
-            x:Name="butQuitter"
+            x:Name="ButQuitter"
             Width="250"
             Height="55"
             Margin="0,318,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Background="#FFDDDDDD"
-            Click="butQuitter_Click"
+            Click="ButQuitter_Click"
             Content="QUITTER"
             FontFamily="Britannic Bold"
             FontSize="20" />
         <Button
-            x:Name="butOptions"
+            x:Name="ButOptions"
             Width="250"
             Height="55"
             Margin="0,217,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Click="butOptions_Click"
+            Click="ButOptions_Click"
             Content="OPTIONS"
             FontFamily="Britannic Bold"
             FontSize="20" />

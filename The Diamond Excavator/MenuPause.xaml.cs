@@ -38,11 +38,11 @@ namespace The_Diamond_Excavator
         //    chronmetre.Start();
         //}
 
-        public void butReprendrePause_Click(object sender, RoutedEventArgs e)
+        public void ButReprendrePause_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }
-        private void butQuitterPause_Click(object sender, RoutedEventArgs e)
+        private void ButQuitterPause_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
@@ -54,7 +54,7 @@ namespace The_Diamond_Excavator
             }
         }
 
-        private void butOptions_Click(object sender, RoutedEventArgs e)
+        private void ButOptions_Click(object sender, RoutedEventArgs e)
         {
             Options fenetreOptions = new Options();
             fenetreOptions.ShowDialog();

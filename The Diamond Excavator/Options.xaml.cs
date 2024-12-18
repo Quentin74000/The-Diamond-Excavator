@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 namespace The_Diamond_Excavator
 {
     /// <summary>
@@ -33,26 +21,26 @@ namespace The_Diamond_Excavator
             }
             NB_TOUR++;
         }
-        private void butValider_Click(object sender, RoutedEventArgs e)
+        private void ButValider_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private void sliderVolumeSon_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void SliderVolumeSon_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (MainWindow.musiqueSon != null)
             {
-                VOLUME_SON = sliderVolumeSon.Value;
-                labVolumeSon.Content = ("Volume Son: " + VOLUME_SON + "%");
+                VOLUME_SON = SliderVolumeSon.Value;
+                LabVolumeSon.Content = ("Volume Son: " + VOLUME_SON + "%");
                 MainWindow.VolumeSon(VOLUME_SON);
             }
         }
 
-        private void sliderVolumeMusique_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void SliderVolumeMusique_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (MainWindow.musiqueFond != null)
             {
-                VOLUME_MUSIQUE = sliderVolumeMusique.Value;
-                labVolumeMusique.Content = ("Volume Son: " + VOLUME_MUSIQUE + "%");
+                VOLUME_MUSIQUE = SliderVolumeMusique.Value;
+                LabVolumeMusique.Content = ("Volume Son: " + VOLUME_MUSIQUE + "%");
                 MainWindow.VolumeMusique(VOLUME_MUSIQUE);
             }
         }

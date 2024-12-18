@@ -12,7 +12,7 @@
     mc:Ignorable="d">
     <Grid>
         <Label
-            x:Name="labVolumeSon"
+            x:Name="LabVolumeSon"
             Width="200"
             Height="35"
             Margin="60,52,0,0"
@@ -23,7 +23,7 @@
             FontSize="16"
             Foreground="White" />
         <Label
-            x:Name="labVolumeMusique"
+            x:Name="LabVolumeMusique"
             Width="200"
             Height="35"
             Margin="60,137,0,0"
@@ -34,7 +34,7 @@
             FontSize="16"
             Foreground="White" />
         <Slider
-            x:Name="sliderVolumeMusique"
+            x:Name="SliderVolumeMusique"
             Width="200"
             Height="31"
             Margin="60,186,0,0"
@@ -45,10 +45,10 @@
             Minimum="0"
             TickFrequency="10"
             TickPlacement="TopLeft"
-            ValueChanged="sliderVolumeMusique_ValueChanged"
+            ValueChanged="SliderVolumeMusique_ValueChanged"
             Value="10" />
         <Slider
-            x:Name="sliderVolumeSon"
+            x:Name="SliderVolumeSon"
             Width="200"
             Height="31"
             Margin="60,91,0,0"
@@ -59,16 +59,16 @@
             Minimum="0"
             TickFrequency="10"
             TickPlacement="TopLeft"
-            ValueChanged="sliderVolumeSon_ValueChanged"
+            ValueChanged="SliderVolumeSon_ValueChanged"
             Value="30" />
         <Button
-            x:Name="butValider"
+            x:Name="ButValider"
             Width="200"
             Height="50"
             Margin="0,243,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Click="butValider_Click"
+            Click="ButValider_Click"
             Content="Valider" />
 
     </Grid>
