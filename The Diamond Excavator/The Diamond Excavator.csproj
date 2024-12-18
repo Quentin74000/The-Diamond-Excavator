@@ -13,6 +13,7 @@
     <None Remove="img\Bombe.png" />
     <None Remove="img\Coeur.png" />
     <None Remove="img\Creuser.gif" />
+    <None Remove="img\Defaite.png" />
     <None Remove="img\Diamant.png" />
     <None Remove="img\Dynamite.png" />
     <None Remove="img\FondMenuJeux.png" />
@@ -28,6 +29,7 @@
     <None Remove="img\PelleteuseGauche.png" />
     <None Remove="img\sol.png" />
     <None Remove="img\Terre.png" />
+    <None Remove="img\Victoire.png" />
     <None Remove="son\bruitChantier.wav" />
     <None Remove="son\explosionGrenade.wav" />
     <None Remove="son\explosionNuke.wav" />
@@ -48,6 +50,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Creuser.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Defaite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Dynamite.png">
@@ -87,6 +92,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\Terre.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\Victoire.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="son\explosionGrenade.wav">

@@ -101,6 +101,18 @@
                     <ImageBrush ImageSource="/img/Terre.png" />
                 </Rectangle.Fill>
             </Rectangle>
+            <Rectangle
+                x:Name="vie"
+                Canvas.Left="-32"
+                Canvas.Top="10"
+                Width="32"
+                Height="32"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" Visibility="Hidden">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/img/Coeur.png" />
+                </Rectangle.Fill>
+            </Rectangle>
             <Image
                 x:Name="joueur"
                 Canvas.Left="930"
@@ -124,6 +136,8 @@
                 Canvas.Left="1289"
                 Canvas.Top="10"
                 Content="Temps : 0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Label x:Name="diamantTrouve" Content="Diamants trouvés : 0/6" Canvas.Left="341" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="bombeRestante" Content="Bombes restantes : " Canvas.Left="548" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
     </Grid>
 </Window>

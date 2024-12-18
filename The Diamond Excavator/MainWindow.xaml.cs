@@ -17,24 +17,27 @@ namespace The_Diamond_Excavator
     {
         public static MediaPlayer musiqueFond, musiqueSon; // pour initialiser la musique
 
-        private static bool gauche, droite, creuse, saute, pause, triche;
+        private static bool gauche, droite, creuse, saute, pause, triche, gagne, perdu;
         private static int vitesseJoueur = 6;
         private static int gravite = 15;
-        private static int saut = 100;
+        private static int saut = 125;
         private static int chrono = 0;
-        private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
+        private static int nbVie = 3;
+        private static int nbDiamant = 0;
         private static int decalageBloc = 64;
+        private static BitmapImage pelleteuseGauche, pelleteuseDroite, pelleteuseCreuse1, pelleteuseCreuse2, pelleteuseCreuse3;
 
         // DÉCLARATION DES CHRONOMETRES
         private static DispatcherTimer minuterie;
         private static DispatcherTimer collision;
         private static DispatcherTimer chronometre;
-        
+        private static DispatcherTimer valeurAffichage;
 
         // DÉCLARATION DES LISTES
         private List<Rectangle> blocs = new List<Rectangle>();
         private List<Rectangle> bombes = new List<Rectangle>();
         private List<Rectangle> diamants = new List<Rectangle>();
+        private List<Rectangle> vies = new List<Rectangle>();
 
         // DÉCLARATION FENETRES
         MenuJeu fenetreMenu = new MenuJeu();
@@ -47,6 +50,10 @@ namespace The_Diamond_Excavator
         public static int NB_MINES = 0;
         public static int NB_DIAMANTS = 0;
 
+
+        private bool peutSauter = true; // Variable pour vérifier si le joueur peut sauter
+        private DispatcherTimer timerSaut; // Timer pour gérer le délai de saut
+
         public MainWindow()
         {
             fenetreMenu.ShowDialog();
@@ -54,6 +61,7 @@ namespace The_Diamond_Excavator
             InitializeComponent();
             InitialisationImages();
             InitialisationMinuterie();
+            InitialisationVie();
             CreationDiamants();
             CreationBombes();
             CreationBlocs();
@@ -130,8 +138,41 @@ namespace The_Diamond_Excavator
             chronometre.Interval = TimeSpan.FromSeconds(1);
             chronometre.Tick += Chronometre;
             chronometre.Start();
-        }
 
+            valeurAffichage = new DispatcherTimer();
+            valeurAffichage.Interval = TimeSpan.FromMilliseconds(16);
+            valeurAffichage.Tick += AffichageValeur;
+            valeurAffichage.Start();
+
+            timerSaut = new DispatcherTimer();
+            timerSaut.Interval = TimeSpan.FromSeconds(1); // Délai d'1 seconde entre les sauts
+            timerSaut.Tick += (s, e) =>
+            {
+                peutSauter = true; // Réautorise le saut après le délai
+                timerSaut.Stop();   // Arrête le timer
+            };
+        }
+        public void InitialisationVie()
+        {
+            int ajouterVie = 0, totalDecalage = 0;
+            do
+            {
+                Rectangle nouvelleVie = new Rectangle
+                {
+                    Tag = "nouvelleVie",
+                    Height = vie.Height,
+                    Width = vie.Width,
+                    Stroke = vie.Stroke,
+                    Fill = vie.Fill,
+                };
+                totalDecalage += decalageBloc;
+                Canvas.SetLeft(nouvelleVie, Canvas.GetLeft(vie) + totalDecalage);
+                Canvas.SetTop(nouvelleVie, Canvas.GetTop(vie));
+                zoneJeu.Children.Add(nouvelleVie);
+                vies.Add(nouvelleVie);
+                ajouterVie += 1;
+            } while (ajouterVie < nbVie);
+        }
         public void CreationBlocs()
         {
             int totalDecalageVertical = 0;
@@ -219,6 +260,7 @@ namespace The_Diamond_Excavator
 
             } while (nbBombe < NB_BOMBES);
         }
+        
         private void CreationDiamants()
         {
             Random random = new Random();
@@ -267,23 +309,80 @@ namespace The_Diamond_Excavator
             } while (nbDiamants < NB_DIAMANTS);
         }
 
-        // Méthode pour pour cliquer sur les blocs
+        // Méthode pour cliquer sur les blocs
         private void BlocClique(object sender, MouseButtonEventArgs e)
         {
-            // Vérifie que le clique est effectué sur un rectangle sinon il revoit null grâce à sender
+            // Vérifie si l'objet cliqué est un rectangle
             Rectangle blocClique = sender as Rectangle;
-            if (blocClique != null)
+            if (blocClique == null)
+                return;
+
+            // Créer un Rect pour le bloc cliqué
+            Rect blocRect = new Rect(Canvas.GetLeft(blocClique), Canvas.GetTop(blocClique), blocClique.Width, blocClique.Height);
+
+            // Vérifie la collision avec la zone du joueur
+            Rect joueurRect = new Rect(Canvas.GetLeft(joueur)-joueur.Width/2, Canvas.GetTop(joueur)-joueur.Height/2, joueur.Width * 2, joueur.Height * 2);
+
+            // Si le bloc n'est pas en collision avec la zone du joueur, ignorer le clic
+            if (!joueurRect.IntersectsWith(blocRect))
             {
-                Rect joueurRect = new Rect(Canvas.GetLeft(joueur)-joueur.Width, Canvas.GetTop(joueur)-joueur.Height, joueur.Width*3, joueur.Height*3);
-                Rect blocRect = new Rect(Canvas.GetLeft(blocClique), Canvas.GetTop(blocClique), blocClique.Width, blocClique.Height);
-                if (joueurRect.IntersectsWith(blocRect))
+                return;
+            }
+
+            // Initialisation des variables pour déterminer si une bombe ou un diamant est présent
+            Rectangle bombeAssociee = null;
+            Rectangle diamantAssociee = null;
+
+            // Vérifie si une bombe est cachée sous ce bloc
+            foreach (Rectangle nouvelleBombe in bombes)
+            {
+                if (Canvas.GetLeft(nouvelleBombe) == Canvas.GetLeft(blocClique) && Canvas.GetTop(nouvelleBombe) == Canvas.GetTop(blocClique))
                 {
-                    zoneJeu.Children.Remove(blocClique);
-                    blocs.Remove(blocClique);
+                    bombeAssociee = nouvelleBombe;
+                    break;
                 }
             }
-        }
+            foreach (Rectangle nouveauDiamant in diamants)
+            {
+                if (Canvas.GetLeft(nouveauDiamant) == Canvas.GetLeft(blocClique) && Canvas.GetTop(nouveauDiamant) == Canvas.GetTop(blocClique))
+                {
+                    diamantAssociee = nouveauDiamant;
+                    break;
+                }
+            }
 
+            // Si une bombe est trouvée sous le bloc
+            if (bombeAssociee != null)
+            {
+                // Retire la dernière vie a être apparue
+                Rectangle viePerdue = vies[^1];
+                zoneJeu.Children.Remove(viePerdue);
+                vies.RemoveAt(vies.Count - 1);
+                nbVie -= 1;
+                
+                // Retire la bombe de la liste pour qu'elle puisse rester affichée sans compter
+                bombes.Remove(bombeAssociee);
+                NB_BOMBES -= 1;
+            }
+
+            if (diamantAssociee != null)
+            {
+
+                // Retire le diamant de la liste pour qu'il puisse rester affiché sans compter
+                diamants.Remove(diamantAssociee);
+                nbDiamant += 1;
+                
+            }
+
+            // Supprime le bloc cliqué du canvas et de la liste
+            blocs.Remove(blocClique);
+            zoneJeu.Children.Remove(blocClique);
+        }
+        private void AffichageValeur(object sender, EventArgs e)
+        {
+            diamantTrouve.Content = "Diamants trouvés : " + nbDiamant + "/" + NB_DIAMANTS;
+            bombeRestante.Content = "Bombes restantes : " + NB_BOMBES;
+        }
         // Méthode pour les collisions
         private void Collision(object sender, EventArgs e)
         {
@@ -348,12 +447,13 @@ namespace The_Diamond_Excavator
         // Méthode Jeu
         private void Jeu(object? sender, EventArgs e)
         {
+            bool gagne = false;
+            bool perdu = false;
             bool bloqueGauche = false;
             bool bloqueDroite = false;
-            bool enSaut = false;
-            int enSautValeur = 0;
+            bool BloqueBas = false;
             Rect joueurCollision = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
-            
+
             // Gestion de la collision entre le joueur est les blocs de façon horizontale
             foreach (Rectangle bloc in blocs)
             {
@@ -390,22 +490,12 @@ namespace The_Diamond_Excavator
                 }
                 joueur.Source = pelleteuseDroite;
             }
-            if (saute && gravite == 0)
+            if (saute && gravite == 0 && peutSauter)
             {
-                bool blocAuDessus = false;
-                foreach (Rectangle nouveauBloc in blocs)
-                {
-                    if (Canvas.GetLeft(nouveauBloc) == Canvas.GetLeft(joueur))
-                    {
-                        blocAuDessus = true;
-                    }
-                }
-                if (!blocAuDessus)
-                {
-                    enSaut = true;
-                    Canvas.SetTop(joueur, Canvas.GetTop(joueur) - saut);
-                }
-                
+                // Exécute le saut
+                Canvas.SetTop(joueur, Canvas.GetTop(joueur) - saut);
+                peutSauter = false; // Désactive le saut jusqu'à la fin du délai
+                timerSaut.Start();  // Lance le timer pour réautoriser le saut
             }
             if (pause)
             {
@@ -434,6 +524,36 @@ namespace The_Diamond_Excavator
             {
                 InitialisationMinuterie();
             }
+            if (nbVie <= 0)
+            {
+                perdu = true;
+            }
+            if (nbDiamant == NB_DIAMANTS)
+            {
+                gagne = true;
+            }
+            if (gagne == true)
+            {
+                foreach (Rectangle nouveauBloc in blocs)
+                {
+                    nouveauBloc.Opacity = 0;
+                }
+                minuterie.Stop();
+                chronometre.Stop();
+                Gagne fenetreGagne = new Gagne();
+                fenetreGagne.ShowDialog();
+            }
+            else if (perdu == true)
+            {
+                foreach (Rectangle nouveauBloc in blocs)
+                {
+                    nouveauBloc.Opacity = 0;
+                }
+                minuterie.Stop();
+                chronometre.Stop();
+                Perdu fenetrePerdu = new Perdu();
+                fenetrePerdu.ShowDialog();
+            }
         }
         // NIVEAUX CHOISIT
         public static void ChoixNiveaux(double niveaux)
@@ -445,7 +565,6 @@ namespace The_Diamond_Excavator
                 NB_MINES = 7;
                 NB_DIAMANTS = 6;
                 //Console.WriteLine($"{NB_BOMBES},{NB_DIAMANTS},{NB_MINES}");
-
             }
             else if (niveaux == 2)
             {
